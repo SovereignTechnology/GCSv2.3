@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="70" height="62" viewBox="286 154 66 66">
+<defs>
+<clipPath id="clip-0"><path clip-rule="nonzero" d="M 314 156 L 349.753906 156 L 349.753906 199 L 314 199 Z M 314 156 "/></clipPath>
+<clipPath id="clip-1"><path clip-rule="nonzero" d="M 287.753906 176 L 323 176 L 323 218.78125 L 287.753906 218.78125 Z M 287.753906 176 "/></clipPath>
+</defs>
+<g clip-path="url(#clip-0)"><path fill-rule="evenodd" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 315.171875 156.511719 L 336.871094 156.511719 L 348.996094 177.519531 L 336.910156 198.476562 L 314.082031 198.476562 L 326.734375 176.550781 L 315.171875 156.511719 "/></g>
+<g clip-path="url(#clip-1)"><path fill-rule="evenodd" fill="rgb(97.24884%, 78.819275%, 29.40979%)" fill-opacity="1" d="M 321.585938 176.550781 L 299.886719 176.550781 L 287.773438 197.554688 L 299.847656 218.5 L 322.675781 218.5 L 310.023438 196.574219 L 321.585938 176.550781 "/></g>
+</svg>

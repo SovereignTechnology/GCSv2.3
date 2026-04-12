@@ -108,18 +108,28 @@
     if (totalEl) totalEl.textContent = total;
 
     function goTo(index) {
+      var prevVideo = slides[current].querySelector('.hero-slide__video');
+      if (prevVideo) prevVideo.pause();
       slides[current].classList.remove('hero-slide--active');
       current = ((index % total) + total) % total;
       slides[current].classList.add('hero-slide--active');
+      var nextVideo = slides[current].querySelector('.hero-slide__video');
+      if (nextVideo) nextVideo.play();
       if (currentEl) currentEl.textContent = current + 1;
     }
 
     function next() { goTo(current + 1); }
     function prev() { goTo(current - 1); }
 
+    function hasVideo(index) {
+      return !!slides[index].querySelector('.hero-slide__video');
+    }
+
     function startAutoplay() {
       stopAutoplay();
-      timer = setInterval(next, autoplayInterval);
+      if (!hasVideo(current)) {
+        timer = setInterval(next, autoplayInterval);
+      }
     }
 
     function stopAutoplay() {
@@ -130,6 +140,16 @@
     if (prevBtn) prevBtn.addEventListener('click', function () { prev(); startAutoplay(); });
 
     startAutoplay();
+
+    // Hero video — fade out poster image once video plays, show it on error
+    qsa('.hero-slide__video').forEach(function (video) {
+      video.addEventListener('playing', function () {
+        video.setAttribute('data-status', 'playing');
+      });
+      video.addEventListener('error', function () {
+        video.removeAttribute('data-status');
+      });
+    });
   }
 
   // ── Scroll Reveal ────────────────────────────────────────────────────────────

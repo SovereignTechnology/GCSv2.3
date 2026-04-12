@@ -1,0 +1,17 @@
+{
+  "name": "gcsv2.3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@playwright/test": "^1.59.1",
+    "playwright": "^1.59.1",
+    "serve": "^14.2.6"
+  }
+}

@@ -1,0 +1,534 @@
+[
+  {
+    "index": 0,
+    "type": "module--header",
+    "classes": "module module--header appear is-visible animated",
+    "tagName": "header",
+    "id": null,
+    "headings": [
+      {
+        "tag": "div",
+        "class": "the-header__title",
+        "text": "Capital\nMarkets Day 2024"
+      },
+      {
+        "tag": "div",
+        "class": "the-header__title",
+        "text": "Resultados 1S 2024"
+      },
+      {
+        "tag": "div",
+        "class": "the-header__title",
+        "text": "."
+      },
+      {
+        "tag": "div",
+        "class": "the-header__title",
+        "text": "Capital\nMarkets Day 2024"
+      },
+      {
+        "tag": "div",
+        "class": "the-header__title",
+        "text": "Resultados 1S 2024"
+      }
+    ],
+    "text": [
+      "ACS obtiene un beneficio neto de 416 millones de euros en el primer semestre de 2024, un 8,1% más",
+      "Hemos celebrado en el auditorio sur IFEMA  nuestra Junta General de Accionistas 2024. La redifusión del evento se encuentra disponible en nuestra web.",
+      "Descubre nuestra estrategia empresarial, desempeño financiero y perspectivas de crecimiento. Te ofrecemos una visión integral de nuestra capacidad para generar valor y las iniciativas que impulsarán nuestro éxito."
+    ],
+    "links": [
+      {
+        "href": "/accionistas-e-inversores/resultados-trimestrales/2024/",
+        "label": "VER MÁS"
+      },
+      {
+        "href": "/accionistas-e-inversores/junta-general-de-accionistas/acuerdos/",
+        "label": "VER MÁS"
+      },
+      {
+        "href": "/shareholders-investors/capital-markets-day/",
+        "label": "Ver más"
+      }
+    ],
+    "stats": [],
+    "newsCards": [],
+    "slides": [],
+    "backgroundImage": null
+  },
+  {
+    "index": 1,
+    "type": "module--video",
+    "classes": "module module--video appear is-visible animated",
+    "tagName": "section",
+    "id": null,
+    "headings": [
+      {
+        "tag": "div",
+        "class": "the-header__pretitle",
+        "text": "VÍDEO"
+      },
+      {
+        "tag": "h2",
+        "class": "the-header__title",
+        "text": "Nuestro vídeo de apertura de la JGA 2024"
+      }
+    ],
+    "text": [
+      "Esta es la presentación en vídeo de la estrategia cohesionada y visión de presente y futuro del Grupo ACS, explicada a nuestros accionistas por algunos de los directivos más representativos de nuestras empresas.",
+      "Esta es la presentación en vídeo de la estrategia cohesionada y visión de presente y futuro del Grupo ACS, explicada a nuestros accionistas por algunos de los directivos más representativos de nuestras empresas."
+    ],
+    "links": [
+      {
+        "href": "https://www.youtube.com/embed/HWDv2EXSiBU",
+        "label": "Ver video"
+      }
+    ],
+    "stats": [],
+    "newsCards": [],
+    "slides": [],
+    "backgroundImage": null
+  },
+  {
+    "index": 2,
+    "type": "module--noticia",
+    "classes": "module module--noticia appear is-visible animated",
+    "tagName": "section",
+    "id": null,
+    "headings": [
+      {
+        "tag": "div",
+        "class": "the-header__pretitle",
+        "text": "Sala de prensa"
+      },
+      {
+        "tag": "h2",
+        "class": "the-header__title",
+        "text": "Últimas noticias"
+      }
+    ],
+    "text": [
+      "Conoce todas nuestras noticias"
+    ],
+    "links": [
+      {
+        "href": "/sala-de-prensa/noticias/notas-de-prensa/",
+        "label": "Conoce todas nuestras noticias"
+      },
+      {
+        "href": "/sala-de-prensa/noticias/notas-de-prensa/acs-obtiene-un-beneficio-neto-de-416-millones-de-euros-en-el-primer-semestre-de-2024-un-81-mas/",
+        "label": "Noticia\n            ACS obtiene un beneficio neto de 416 millones de euros en el primer semestre de 2024, un 8,1% más\n                            \n\nLas ventas alcanzan los 18.749 millones de euros, au"
+      },
+      {
+        "href": "/sala-de-prensa/noticias/notas-de-prensa/el-grupo-acs-acciona-y-meridiam-construiran-y-operaran-la-sr400-express-lane-de-atlanta-georgia-durante-50-anos/",
+        "label": "Noticia\n            El Grupo ACS, Acciona y Meridiam construirán y operarán la SR400 Express Lane de Atlanta (Georgia) durante 50 años\n                        16.08.2024\n            \n                \n"
+      },
+      {
+        "href": "/sala-de-prensa/noticias/notas-de-prensa/cimic-construira-la-segunda-fase-de-la-bateria-western-downs-de-neoen/",
+        "label": "Noticia\n            CIMIC construirá la segunda fase de la batería Western Downs de Neoen\n                        27.08.2024\n            \n                \n                    Leer"
+      },
+      {
+        "href": "/sala-de-prensa/noticias/notas-de-prensa/abertis-amplia-su-presencia-en-chile-tras-ganar-la-concesion-de-la-ruta-5-santiago-los-vilos/",
+        "label": "Noticia\n            Abertis amplía su presencia en Chile tras ganar la concesión de la Ruta 5 Santiago - Los Vilos\n                        15.08.2024\n            \n                \n                    "
+      },
+      {
+        "href": "/sala-de-prensa/noticias/notas-de-prensa/hochtief-se-adjudica-un-importante-contrato-de-mantenimiento-de-infraestructuras-en-escocia/",
+        "label": "Noticia\n            HOCHTIEF se adjudica un importante contrato de mantenimiento de infraestructuras en Escocia\n                        13.08.2024\n            \n                \n                    Lee"
+      },
+      {
+        "href": "/sala-de-prensa/noticias/notas-de-prensa/acs-lidera-y-transforma-la-movilidad-de-cero-emisiones/",
+        "label": "Noticia\n            ACS lidera y transforma la movilidad de cero emisiones\n                        12.08.2024\n            \n                \n                    Leer"
+      },
+      {
+        "href": "/sala-de-prensa/noticias/notas-de-prensa/nace-la-empresa-de-ingenieria-civil-referente-en-norteamerica/",
+        "label": "Noticia\n            Nace la empresa de Ingeniería Civil referente en Norteamérica\n                        30.07.2024\n            \n                \n                    Leer"
+      }
+    ],
+    "stats": [],
+    "newsCards": [],
+    "slides": [],
+    "backgroundImage": null
+  },
+  {
+    "index": 3,
+    "type": "module--cta",
+    "classes": "module module--cta appear is-visible animated",
+    "tagName": "section",
+    "id": null,
+    "headings": [
+      {
+        "tag": "div",
+        "class": "the-header__pretitle",
+        "text": "Accionistas e inversores"
+      },
+      {
+        "tag": "h2",
+        "class": "the-header__title",
+        "text": "Informe Integrado 2023"
+      }
+    ],
+    "text": [
+      "Consulta el último informe publicado por el Grupo ACS"
+    ],
+    "links": [
+      {
+        "href": "/accionistas-e-inversores/informe-anual/",
+        "label": "Acceder"
+      }
+    ],
+    "stats": [],
+    "newsCards": [],
+    "slides": [],
+    "backgroundImage": null
+  },
+  {
+    "index": 4,
+    "type": "module--video",
+    "classes": "module module--video appear is-visible animated",
+    "tagName": "section",
+    "id": null,
+    "headings": [
+      {
+        "tag": "div",
+        "class": "the-header__pretitle",
+        "text": "VÍDEO"
+      },
+      {
+        "tag": "h2",
+        "class": "the-header__title",
+        "text": "Así fue nuestro CMD; One Group, One Team"
+      }
+    ],
+    "text": [
+      "El Grupo ACS ha celebrado en el Círculo de Bellas Artes su primer Capital Markets Day presentando su Plan Estratégico 2024-2026",
+      "El Grupo ACS ha celebrado en el Círculo de Bellas Artes su primer Capital Markets Day presentando su Plan Estratégico 2024-2026"
+    ],
+    "links": [
+      {
+        "href": "https://www.youtube.com/embed/byKyMH_Ud8c",
+        "label": "Ver video"
+      }
+    ],
+    "stats": [],
+    "newsCards": [],
+    "slides": [],
+    "backgroundImage": null
+  },
+  {
+    "index": 5,
+    "type": "module--selector",
+    "classes": "module module--selector appear is-visible animated",
+    "tagName": "section",
+    "id": null,
+    "headings": [
+      {
+        "tag": "div",
+        "class": "the-header__pretitle",
+        "text": "Actividades"
+      },
+      {
+        "tag": "h2",
+        "class": "the-header__title",
+        "text": "Áreas de negocio"
+      },
+      {
+        "tag": "h3",
+        "class": "card__title",
+        "text": "Soluciones Integrales"
+      },
+      {
+        "tag": "h3",
+        "class": "card__title",
+        "text": "Ingeniería Civil y Construcción"
+      },
+      {
+        "tag": "h3",
+        "class": "card__title",
+        "text": "Inversión en Infraestructuras"
+      },
+      {
+        "tag": "h3",
+        "class": "card__title",
+        "text": "Otros Negocios"
+      }
+    ],
+    "text": [],
+    "links": [
+      {
+        "href": "/areas-de-negocio/soluciones-integrales/",
+        "label": "Ver más"
+      },
+      {
+        "href": "/areas-de-negocio/ingenieria-y-construccion/",
+        "label": "Ver más"
+      },
+      {
+        "href": "/areas-de-negocio/inversion-en-infraestructuras/",
+        "label": "Ver más"
+      },
+      {
+        "href": "/areas-de-negocio/otros-negocios/",
+        "label": "Ver más"
+      }
+    ],
+    "stats": [],
+    "newsCards": [
+      {
+        "title": "Soluciones Integrales",
+        "image": "/ficheros_editor/img/m_selectordata/2/selector-2--md.jpg",
+        "link": "/areas-de-negocio/soluciones-integrales/"
+      },
+      {
+        "title": "Ingeniería Civil y Construcción",
+        "image": "/ficheros_editor/img/m_selectordata/1/selector-1--md.jpg",
+        "link": "/areas-de-negocio/ingenieria-y-construccion/"
+      },
+      {
+        "title": "Inversión en Infraestructuras",
+        "image": "/ficheros_editor/img/m_selectordata/3/selector-3--md.jpg",
+        "link": "/areas-de-negocio/inversion-en-infraestructuras/"
+      },
+      {
+        "title": "Otros Negocios",
+        "image": "/ficheros_editor/img/m_selectordata/4/selector-4--md.jpg",
+        "link": "/areas-de-negocio/otros-negocios/"
+      }
+    ],
+    "slides": [],
+    "backgroundImage": null
+  },
+  {
+    "index": 6,
+    "type": "module--cta",
+    "classes": "module module--cta appear is-visible animated",
+    "tagName": "section",
+    "id": null,
+    "headings": [
+      {
+        "tag": "div",
+        "class": "the-header__pretitle",
+        "text": "Sostenibilidad"
+      },
+      {
+        "tag": "h2",
+        "class": "the-header__title",
+        "text": "Contribuimos al desarrollo sostenible"
+      }
+    ],
+    "text": [
+      "El Grupo ACS es sostenibilidad. El Dow Jones Sustainability World Index destaca nuestro compromiso con el medio ambiente a nivel internacional."
+    ],
+    "links": [
+      {
+        "href": "/sostenibilidad/estrategia-de-sostenibilidad/",
+        "label": "Ver más"
+      }
+    ],
+    "stats": [],
+    "newsCards": [],
+    "slides": [],
+    "backgroundImage": null
+  },
+  {
+    "index": 7,
+    "type": "module--numero",
+    "classes": "module module--numero appear is-visible animated",
+    "tagName": "section",
+    "id": null,
+    "headings": [
+      {
+        "tag": "div",
+        "class": "the-header__pretitle",
+        "text": "Huella en números"
+      },
+      {
+        "tag": "h2",
+        "class": "the-header__title",
+        "text": "Principales cifras del Grupo ACS en 2023"
+      }
+    ],
+    "text": [
+      "Accede a la información financiera"
+    ],
+    "links": [
+      {
+        "href": "/conozca-acs/datos-fundamentales/",
+        "label": "Accede a la información financiera"
+      }
+    ],
+    "stats": [
+      {
+        "value": "35.738M€",
+        "label": ""
+      },
+      {
+        "value": "73.538M€",
+        "label": ""
+      },
+      {
+        "value": "780M€",
+        "label": ""
+      },
+      {
+        "value": "135.419",
+        "label": ""
+      }
+    ],
+    "newsCards": [],
+    "slides": [],
+    "backgroundImage": null
+  },
+  {
+    "index": 8,
+    "type": "module--video",
+    "classes": "module module--video appear is-visible animated",
+    "tagName": "section",
+    "id": null,
+    "headings": [
+      {
+        "tag": "div",
+        "class": "the-header__pretitle",
+        "text": "VÍDEO"
+      },
+      {
+        "tag": "h2",
+        "class": "the-header__title",
+        "text": "Construyendo el futuro, transformando el presente"
+      }
+    ],
+    "text": [
+      "Construimos un futuro mejor a través del desarrollo y la operación de infraestructuras que contribuyen al progreso económico y social de los países en los que estamos presentes.Ver nuestros videos",
+      "Construimos un futuro mejor a través del desarrollo y la operación de infraestructuras que contribuyen al progreso económico y social de los países en los que estamos presentes."
+    ],
+    "links": [
+      {
+        "href": "/sala-de-prensa/videos/",
+        "label": "Ver nuestros videos"
+      },
+      {
+        "href": "https://www.youtube.com/embed/QwOcGj1kMYg",
+        "label": "Ver video"
+      }
+    ],
+    "stats": [],
+    "newsCards": [],
+    "slides": [],
+    "backgroundImage": null
+  },
+  {
+    "index": 9,
+    "type": "module--texto",
+    "classes": "module module--texto appear is-visible animated",
+    "tagName": "section",
+    "id": null,
+    "headings": [
+      {
+        "tag": "div",
+        "class": "the-header__pretitle",
+        "text": "Empleo"
+      },
+      {
+        "tag": "h2",
+        "class": "the-header__title",
+        "text": "Encuentra tu lugar en el Grupo ACS"
+      }
+    ],
+    "text": [
+      "En el Grupo ACS somos más de 135.000 profesionales de las disciplinas más diversas, trabajando codo a codo para construir un futuro mejor para todos. Únete a nuestro equipo.",
+      "En el Grupo ACS somos más de 135.000 profesionales de las disciplinas más diversas, trabajando codo a codo para construir un futuro mejor para todos. Únete a nuestro equipo."
+    ],
+    "links": [
+      {
+        "href": "conozca-acs/unete-al-grupo-acs/",
+        "label": "Acceder al portal de empleo"
+      }
+    ],
+    "stats": [],
+    "newsCards": [],
+    "slides": [],
+    "backgroundImage": null
+  },
+  {
+    "index": 10,
+    "type": "module--cta",
+    "classes": "module module--cta appear is-visible animated",
+    "tagName": "section",
+    "id": null,
+    "headings": [
+      {
+        "tag": "div",
+        "class": "the-header__pretitle",
+        "text": "Al día"
+      },
+      {
+        "tag": "h2",
+        "class": "the-header__title",
+        "text": "Suscríbete a nuestra newsletter"
+      }
+    ],
+    "text": [
+      "Recibe periódicamente en tu buzón de correo electrónico la última hora sobre el Grupo ACS."
+    ],
+    "links": [
+      {
+        "href": "https://clickacm.com/share/FXphAlpIOCskNrew8ocR04paDACC4AU8tGTAFiAO6UIHNI71B6EFTXvI86/",
+        "label": "Suscríbete aquí"
+      }
+    ],
+    "stats": [],
+    "newsCards": [],
+    "slides": [],
+    "backgroundImage": null
+  },
+  {
+    "index": 11,
+    "type": "module",
+    "classes": "module the-footer appear is-visible animated",
+    "tagName": "footer",
+    "id": null,
+    "headings": [],
+    "text": [],
+    "links": [
+      {
+        "href": "/",
+        "label": "Grupo ACS"
+      },
+      {
+        "href": "/informacion-general/",
+        "label": "Información general"
+      },
+      {
+        "href": "/politica-de-cookies/",
+        "label": "Política de Cookies"
+      },
+      {
+        "href": "/aviso-legal/",
+        "label": "Aviso Legal"
+      },
+      {
+        "href": "/empresas-del-grupo-acs/",
+        "label": "Empresas del Grupo ACS"
+      },
+      {
+        "href": "/contacto/",
+        "label": "Contacto"
+      },
+      {
+        "href": "https://www.linkedin.com/company/grupo-acs/",
+        "label": "Linkedin"
+      },
+      {
+        "href": "https://www.youtube.com/@Grupo_ACS",
+        "label": "YouTube"
+      },
+      {
+        "href": "https://podcasters.spotify.com/pod/show/grupo-acs/",
+        "label": "Spotify"
+      }
+    ],
+    "stats": [],
+    "newsCards": [],
+    "slides": [],
+    "backgroundImage": null
+  }
+]

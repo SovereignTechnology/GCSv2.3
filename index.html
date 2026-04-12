@@ -13,7 +13,7 @@
 </head>
 <body>
   <!-- Skip Nav -->
-  <a href="#main-content" class="skip-nav">Skip to main content</a>
+  <a href="#main-content" class="skip-nav" data-i18n="skip">Skip to main content</a>
 
   <!-- Top Bar -->
   <div class="top-bar">
@@ -23,37 +23,37 @@
       <span class="ticker__item"><strong>IBEX 35</strong> 11.401,90 <span class="ticker__change ticker__change--up">&#9650; 0,36%</span></span>
     </div>
     <div class="top-bar__links">
-      <a href="#">CNMV COMMUNICATIONS</a>
-      <a href="#">CONTACT</a>
-      <a href="#">ESPAÑOL</a>
+      <a href="#" data-i18n="tb.cnmv">CNMV COMMUNICATIONS</a>
+      <a href="#" data-i18n="tb.contact">CONTACT</a>
+      <a href="#" id="lang-toggle" data-i18n="tb.lang">ESPAÑOL</a>
       <span class="top-bar__separator">|</span>
-      <a href="#">ACS Group Companies</a>
-      <button class="top-bar__search" aria-label="Search">
+      <a href="#" data-i18n="tb.companies">ACS Group Companies</a>
+      <button class="top-bar__search" data-i18n-aria="tb.search" aria-label="Search">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </button>
     </div>
   </div>
 
   <!-- Navigation -->
-  <nav class="the-nav" role="navigation" aria-label="Main navigation">
+  <nav class="the-nav" role="navigation" data-i18n-aria="nav.label" aria-label="Main navigation">
     <div class="the-nav__inner">
-      <a href="/" class="the-logo" aria-label="Grupo ACS - Home">
+      <a href="/" class="the-logo" data-i18n-aria="nav.home" aria-label="Grupo ACS - Home">
         <img src="assets/images/img-0.svg" alt="Grupo ACS" width="120" height="33" loading="eager">
       </a>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <button class="nav-toggle" data-i18n-aria="nav.toggle" aria-label="Open menu" aria-expanded="false">
         <span class="nav-toggle__bar"></span>
         <span class="nav-toggle__bar"></span>
         <span class="nav-toggle__bar"></span>
       </button>
       <ul class="the-nav__menu">
-        <li><a href="#">About ACS</a></li>
-        <li><a href="#">Business Areas</a></li>
-        <li><a href="#">Shareholders & Investors</a></li>
-        <li><a href="#">Corporate Governance</a></li>
-        <li><a href="#">Compliance</a></li>
-        <li><a href="#">Sustainability</a></li>
-        <li><a href="#">Press Room</a></li>
-        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#" data-i18n="nav.0">About ACS</a></li>
+        <li><a href="#" data-i18n="nav.1">Business Areas</a></li>
+        <li><a href="#" data-i18n="nav.2">Shareholders & Investors</a></li>
+        <li><a href="#" data-i18n="nav.3">Corporate Governance</a></li>
+        <li><a href="#" data-i18n="nav.4">Compliance</a></li>
+        <li><a href="#" data-i18n="nav.5">Sustainability</a></li>
+        <li><a href="#" data-i18n="nav.6">Press Room</a></li>
+        <li><a href="#" data-i18n="nav.7">Privacy Policy</a></li>
       </ul>
     </div>
   </nav>
@@ -61,45 +61,45 @@
   <!-- Mobile Nav Overlay -->
   <div class="nav-overlay" aria-hidden="true">
     <ul class="nav-overlay__menu">
-      <li><a href="#">Conozca ACS</a></li>
-      <li><a href="#">Áreas de negocio</a></li>
-      <li><a href="#">Accionistas e inversores</a></li>
-      <li><a href="#">Gobierno corporativo</a></li>
-      <li><a href="#">Compliance</a></li>
-      <li><a href="#">Sostenibilidad</a></li>
-      <li><a href="#">Sala de prensa</a></li>
-      <li><a href="#">Política de privacidad</a></li>
+      <li><a href="#" data-i18n="nav.0">About ACS</a></li>
+      <li><a href="#" data-i18n="nav.1">Business Areas</a></li>
+      <li><a href="#" data-i18n="nav.2">Shareholders & Investors</a></li>
+      <li><a href="#" data-i18n="nav.3">Corporate Governance</a></li>
+      <li><a href="#" data-i18n="nav.4">Compliance</a></li>
+      <li><a href="#" data-i18n="nav.5">Sustainability</a></li>
+      <li><a href="#" data-i18n="nav.6">Press Room</a></li>
+      <li><a href="#" data-i18n="nav.7">Privacy Policy</a></li>
     </ul>
   </div>
 
   <main id="main-content">
 
     <!-- Section 0: Hero Slider -->
-    <header class="module module--header" data-animate="fade" aria-label="Presentaciones destacadas">
+    <header class="module module--header" data-animate="fade" data-i18n-aria="header.label" aria-label="Featured presentations">
       <div class="hero-slider">
         <div class="hero-slider__track">
           <!-- Slide 1 -->
           <div class="hero-slide hero-slide--active" data-index="0">
             <div class="hero-slide__bg">
-              <img src="assets/images/hero-bg-2.jpg" alt="Resultados 1S 2024" width="1440" height="900" loading="eager" fetchpriority="high">
+              <img src="assets/images/hero-bg-2.jpg" data-i18n-alt="s0.alt" alt="Results H1 2024" width="1440" height="900" loading="eager" fetchpriority="high">
             </div>
             <div class="hero-slide__overlay"></div>
             <div class="hero-slide__content">
-              <h1 class="hero-slide__title">Resultados <em>1S 2024</em></h1>
-              <p class="hero-slide__text">ACS obtiene un beneficio neto de 416 millones de euros en el primer semestre de 2024, un 8,1% más</p>
-              <a href="#" class="btn btn--outline">VER MÁS <span class="btn__arrow">&rarr;</span></a>
+              <h1 class="hero-slide__title" data-i18n-html="s0.title">Results <em>H1 2024</em></h1>
+              <p class="hero-slide__text" data-i18n="s0.text">ACS achieves a net profit of 416 million euros in the first half of 2024, up 8.1%</p>
+              <a href="#" class="btn btn--outline" data-i18n-html="s0.btn">READ MORE <span class="btn__arrow">&rarr;</span></a>
             </div>
           </div>
           <!-- Slide 2 -->
           <div class="hero-slide" data-index="1">
             <div class="hero-slide__bg">
-              <img src="assets/images/hero-bg-3.jpg" alt="Junta General de Accionistas" width="1440" height="900" loading="eager">
+              <img src="assets/images/hero-bg-3.jpg" data-i18n-alt="s0b.alt" alt="Annual General Meeting" width="1440" height="900" loading="eager">
             </div>
             <div class="hero-slide__overlay"></div>
             <div class="hero-slide__content">
               <h2 class="hero-slide__title"><em>.</em></h2>
-              <p class="hero-slide__text">Hemos celebrado en el auditorio sur IFEMA nuestra Junta General de Accionistas 2024. La redifusión del evento se encuentra disponible en nuestra web.</p>
-              <a href="#" class="btn btn--outline">VER MÁS <span class="btn__arrow">&rarr;</span></a>
+              <p class="hero-slide__text" data-i18n="s0b.text">We held our 2024 Annual General Meeting at the IFEMA south auditorium. The replay of the event is available on our website.</p>
+              <a href="#" class="btn btn--outline" data-i18n-html="s0b.btn">READ MORE <span class="btn__arrow">&rarr;</span></a>
             </div>
           </div>
           <!-- Slide 3 -->
@@ -109,18 +109,18 @@
             </div>
             <div class="hero-slide__overlay"></div>
             <div class="hero-slide__content">
-              <h2 class="hero-slide__title">Capital<br><em>Markets Day 2024</em></h2>
-              <p class="hero-slide__text">Descubre nuestra estrategia empresarial, desempeño financiero y perspectivas de crecimiento. Te ofrecemos una visión integral de nuestra capacidad para generar valor y las iniciativas que impulsarán nuestro éxito.</p>
-              <a href="#" class="btn btn--outline">Ver más <span class="btn__arrow">&rarr;</span></a>
+              <h2 class="hero-slide__title" data-i18n-html="s0c.title">Capital<br><em>Markets Day 2024</em></h2>
+              <p class="hero-slide__text" data-i18n="s0c.text">Discover our business strategy, financial performance and growth prospects. We offer a comprehensive view of our ability to create value and the initiatives that will drive our success.</p>
+              <a href="#" class="btn btn--outline" data-i18n-html="s0c.btn">Read more <span class="btn__arrow">&rarr;</span></a>
             </div>
           </div>
         </div>
         <!-- Slider Controls -->
         <div class="hero-slider__controls">
-          <button class="hero-slider__prev" aria-label="Diapositiva anterior">
+          <button class="hero-slider__prev" data-i18n-aria="slider.prev" aria-label="Previous slide">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
           </button>
-          <button class="hero-slider__next" aria-label="Siguiente diapositiva">
+          <button class="hero-slider__next" data-i18n-aria="slider.next" aria-label="Next slide">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>
           </button>
           <div class="hero-slider__counter">
@@ -131,39 +131,39 @@
     </header>
 
     <!-- Section 1: Video - JGA 2024 -->
-    <section class="module module--video" data-animate="fade-up" aria-label="Vídeo JGA 2024">
+    <section class="module module--video" data-animate="fade-up" data-i18n-aria="s1.label" aria-label="Video AGM 2024">
       <div class="module__inner">
         <div class="module__header module__header--split">
           <div class="module__header-left">
-            <span class="the-header__pretitle">VÍDEO</span>
-            <h2 class="the-header__title">Nuestro vídeo de apertura de la <em>JGA 2024</em></h2>
+            <span class="the-header__pretitle" data-i18n="s1.pre">VIDEO</span>
+            <h2 class="the-header__title" data-i18n-html="s1.title">Our opening video of the <em>AGM 2024</em></h2>
           </div>
           <div class="module__header-right">
-            <p>Esta es la presentación en vídeo de la estrategia cohesionada y visión de presente y futuro del Grupo ACS, explicada a nuestros accionistas por algunos de los directivos más representativos de nuestras empresas.</p>
+            <p data-i18n="s1.desc">This is the video presentation of the cohesive strategy and vision for the present and future of Grupo ACS, explained to our shareholders by some of the most representative executives of our companies.</p>
           </div>
         </div>
         <div class="video-player" data-video="https://www.youtube.com/embed/HWDv2EXSiBU">
-          <img src="assets/images/img-4.png" alt="Vídeo de apertura JGA 2024" width="1440" height="600" loading="lazy">
+          <img src="assets/images/img-4.png" data-i18n-alt="s1.alt" alt="AGM 2024 opening video" width="1440" height="600" loading="lazy">
           <div class="video-player__overlay">
-            <button class="video-player__play" aria-label="Reproducir vídeo">
+            <button class="video-player__play" data-i18n-aria="play" aria-label="Play video">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </button>
-            <p class="video-player__caption">VÍDEO DE APERTURA JGA 2024</p>
+            <p class="video-player__caption" data-i18n="s1.cap">AGM 2024 OPENING VIDEO</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Section 2: News -->
-    <section class="module module--noticia" data-animate="fade-up" aria-label="Últimas noticias">
+    <section class="module module--noticia" data-animate="fade-up" data-i18n-aria="s2.label" aria-label="Latest news">
       <div class="module__inner">
         <div class="module__header module__header--split">
           <div class="module__header-left">
-            <span class="the-header__pretitle">Sala de prensa</span>
-            <h2 class="the-header__title"><em>Últimas</em> noticias</h2>
+            <span class="the-header__pretitle" data-i18n="s2.pre">Press Room</span>
+            <h2 class="the-header__title" data-i18n-html="s2.title"><em>Latest</em> news</h2>
           </div>
           <div class="module__header-right">
-            <a href="#" class="link-arrow">CONOCE TODAS NUESTRAS NOTICIAS <span class="btn__arrow">&rarr;</span></a>
+            <a href="#" class="link-arrow" data-i18n-html="s2.link">SEE ALL OUR NEWS <span class="btn__arrow">&rarr;</span></a>
           </div>
         </div>
         <div class="news-grid">
@@ -171,14 +171,14 @@
           <article class="news-card news-card--featured">
             <a href="#">
               <div class="news-card__image">
-                <img src="assets/images/news-card-5.jpg" alt="ACS obtiene un beneficio neto de 416 millones de euros" width="600" height="400" loading="lazy">
+                <img src="assets/images/news-card-5.jpg" data-i18n-alt="n0.alt" alt="ACS achieves a net profit of 416 million euros" width="600" height="400" loading="lazy">
               </div>
               <div class="news-card__content">
-                <span class="news-card__tag">Noticia</span>
-                <h3 class="news-card__title">ACS obtiene un beneficio neto de 416 millones de euros en el primer semestre de 2024, un 8,1% más</h3>
-                <p class="news-card__excerpt">Las ventas alcanzan los 18.749 millones de euros, aumentando un 10,1% respecto al año anterior. El EBITDA se sitúa en los 1.157 millones de euros, creciendo un 23,8%, tras...</p>
+                <span class="news-card__tag" data-i18n="news.tag">News</span>
+                <h3 class="news-card__title" data-i18n="n0.title">ACS achieves a net profit of 416 million euros in the first half of 2024, up 8.1%</h3>
+                <p class="news-card__excerpt" data-i18n="n0.excerpt">Sales reach 18,749 million euros, increasing 10.1% compared to the previous year. EBITDA stands at 1,157 million euros, growing 23.8%, after...</p>
                 <span class="news-card__date">30.07.2024</span>
-                <span class="link-arrow link-arrow--small">LEER <span class="btn__arrow">&rarr;</span></span>
+                <span class="link-arrow link-arrow--small" data-i18n-html="news.read">READ <span class="btn__arrow">&rarr;</span></span>
               </div>
             </a>
           </article>
@@ -186,13 +186,13 @@
           <article class="news-card">
             <a href="#">
               <div class="news-card__image">
-                <img src="assets/images/news-card-6.png" alt="SR400 Express Lane de Atlanta" width="400" height="250" loading="lazy">
+                <img src="assets/images/news-card-6.png" data-i18n-alt="n1.alt" alt="SR400 Express Lane in Atlanta" width="400" height="250" loading="lazy">
               </div>
               <div class="news-card__content">
-                <span class="news-card__tag">Noticia</span>
-                <h3 class="news-card__title">El Grupo ACS, Acciona y Meridiam construirán y operarán la SR400 Express Lane de Atlanta (Georgia) durante 50 años</h3>
+                <span class="news-card__tag" data-i18n="news.tag">News</span>
+                <h3 class="news-card__title" data-i18n="n1.title">ACS Group, Acciona and Meridiam will build and operate the SR400 Express Lane in Atlanta (Georgia) for 50 years</h3>
                 <span class="news-card__date">16.08.2024</span>
-                <span class="link-arrow link-arrow--small">LEER <span class="btn__arrow">&rarr;</span></span>
+                <span class="link-arrow link-arrow--small" data-i18n-html="news.read">READ <span class="btn__arrow">&rarr;</span></span>
               </div>
             </a>
           </article>
@@ -200,13 +200,13 @@
           <article class="news-card">
             <a href="#">
               <div class="news-card__image">
-                <img src="assets/images/news-card-7.png" alt="Batería Western Downs de Neoen" width="400" height="250" loading="lazy">
+                <img src="assets/images/news-card-7.png" data-i18n-alt="n2.alt" alt="Neoen Western Downs Battery" width="400" height="250" loading="lazy">
               </div>
               <div class="news-card__content">
-                <span class="news-card__tag">Noticia</span>
-                <h3 class="news-card__title">CIMIC construirá la segunda fase de la batería Western Downs de Neoen</h3>
+                <span class="news-card__tag" data-i18n="news.tag">News</span>
+                <h3 class="news-card__title" data-i18n="n2.title">CIMIC to build the second phase of Neoen's Western Downs Battery</h3>
                 <span class="news-card__date">27.08.2024</span>
-                <span class="link-arrow link-arrow--small">LEER <span class="btn__arrow">&rarr;</span></span>
+                <span class="link-arrow link-arrow--small" data-i18n-html="news.read">READ <span class="btn__arrow">&rarr;</span></span>
               </div>
             </a>
           </article>
@@ -214,13 +214,13 @@
           <article class="news-card">
             <a href="#">
               <div class="news-card__image">
-                <img src="assets/images/news-card-8.jpg" alt="Abertis amplía presencia en Chile" width="400" height="250" loading="lazy">
+                <img src="assets/images/news-card-8.jpg" data-i18n-alt="n3.alt" alt="Abertis expands presence in Chile" width="400" height="250" loading="lazy">
               </div>
               <div class="news-card__content">
-                <span class="news-card__tag">Noticia</span>
-                <h3 class="news-card__title">Abertis amplía su presencia en Chile tras ganar la concesión de la Ruta 5 Santiago - Los Vilos</h3>
+                <span class="news-card__tag" data-i18n="news.tag">News</span>
+                <h3 class="news-card__title" data-i18n="n3.title">Abertis expands its presence in Chile after winning the Ruta 5 Santiago - Los Vilos concession</h3>
                 <span class="news-card__date">15.08.2024</span>
-                <span class="link-arrow link-arrow--small">LEER <span class="btn__arrow">&rarr;</span></span>
+                <span class="link-arrow link-arrow--small" data-i18n-html="news.read">READ <span class="btn__arrow">&rarr;</span></span>
               </div>
             </a>
           </article>
@@ -228,13 +228,13 @@
           <article class="news-card">
             <a href="#">
               <div class="news-card__image">
-                <img src="assets/images/news-card-9.jpg" alt="HOCHTIEF contrato Escocia" width="400" height="250" loading="lazy">
+                <img src="assets/images/news-card-9.jpg" data-i18n-alt="n4.alt" alt="HOCHTIEF Scotland contract" width="400" height="250" loading="lazy">
               </div>
               <div class="news-card__content">
-                <span class="news-card__tag">Noticia</span>
-                <h3 class="news-card__title">HOCHTIEF se adjudica un importante contrato de mantenimiento de infraestructuras en Escocia</h3>
+                <span class="news-card__tag" data-i18n="news.tag">News</span>
+                <h3 class="news-card__title" data-i18n="n4.title">HOCHTIEF awarded a major infrastructure maintenance contract in Scotland</h3>
                 <span class="news-card__date">13.08.2024</span>
-                <span class="link-arrow link-arrow--small">LEER <span class="btn__arrow">&rarr;</span></span>
+                <span class="link-arrow link-arrow--small" data-i18n-html="news.read">READ <span class="btn__arrow">&rarr;</span></span>
               </div>
             </a>
           </article>
@@ -242,13 +242,13 @@
           <article class="news-card">
             <a href="#">
               <div class="news-card__image">
-                <img src="assets/images/news-card-10.jpg" alt="ACS movilidad cero emisiones" width="400" height="250" loading="lazy">
+                <img src="assets/images/news-card-10.jpg" data-i18n-alt="n5.alt" alt="ACS zero-emission mobility" width="400" height="250" loading="lazy">
               </div>
               <div class="news-card__content">
-                <span class="news-card__tag">Noticia</span>
-                <h3 class="news-card__title">ACS lidera y transforma la movilidad de cero emisiones</h3>
+                <span class="news-card__tag" data-i18n="news.tag">News</span>
+                <h3 class="news-card__title" data-i18n="n5.title">ACS leads and transforms zero-emission mobility</h3>
                 <span class="news-card__date">12.08.2024</span>
-                <span class="link-arrow link-arrow--small">LEER <span class="btn__arrow">&rarr;</span></span>
+                <span class="link-arrow link-arrow--small" data-i18n-html="news.read">READ <span class="btn__arrow">&rarr;</span></span>
               </div>
             </a>
           </article>
@@ -256,13 +256,13 @@
           <article class="news-card">
             <a href="#">
               <div class="news-card__image">
-                <img src="assets/images/news-card-11.png" alt="Ingeniería Civil Norteamérica" width="400" height="250" loading="lazy">
+                <img src="assets/images/news-card-11.png" data-i18n-alt="n6.alt" alt="Civil Engineering North America" width="400" height="250" loading="lazy">
               </div>
               <div class="news-card__content">
-                <span class="news-card__tag">Noticia</span>
-                <h3 class="news-card__title">Nace la empresa de Ingeniería Civil referente en Norteamérica</h3>
+                <span class="news-card__tag" data-i18n="news.tag">News</span>
+                <h3 class="news-card__title" data-i18n="n6.title">A leading Civil Engineering company is born in North America</h3>
                 <span class="news-card__date">30.07.2024</span>
-                <span class="link-arrow link-arrow--small">LEER <span class="btn__arrow">&rarr;</span></span>
+                <span class="link-arrow link-arrow--small" data-i18n-html="news.read">READ <span class="btn__arrow">&rarr;</span></span>
               </div>
             </a>
           </article>
@@ -270,39 +270,39 @@
       </div>
     </section>
 
-    <!-- Section 3: CTA - Informe Integrado -->
-    <section class="module module--cta" data-animate="fade-up" aria-label="Informe Integrado 2023">
+    <!-- Section 3: CTA - Integrated Report -->
+    <section class="module module--cta" data-animate="fade-up" data-i18n-aria="s3.label" aria-label="Integrated Report 2023">
       <div class="module__inner">
         <div class="cta-split">
           <div class="cta-split__text" style="background-color: var(--color-primary);">
-            <span class="the-header__pretitle the-header__pretitle--light">Accionistas e inversores</span>
-            <h2 class="the-header__title the-header__title--light">Informe Integrado 2023</h2>
-            <p class="cta-split__desc">Consulta el último informe publicado por el Grupo ACS</p>
-            <a href="#" class="btn btn--gold">Acceder <span class="btn__arrow">&rarr;</span></a>
+            <span class="the-header__pretitle the-header__pretitle--light" data-i18n="s3.pre">Shareholders & Investors</span>
+            <h2 class="the-header__title the-header__title--light" data-i18n="s3.title">Integrated Report 2023</h2>
+            <p class="cta-split__desc" data-i18n="s3.desc">View the latest report published by Grupo ACS</p>
+            <a href="#" class="btn btn--gold" data-i18n-html="s3.btn">Access <span class="btn__arrow">&rarr;</span></a>
           </div>
           <div class="cta-split__image">
-            <img src="assets/images/cta-bg-12.jpg" alt="Informe Integrado 2023" width="720" height="400" loading="lazy">
+            <img src="assets/images/cta-bg-12.jpg" data-i18n-alt="s3.alt" alt="Integrated Report 2023" width="720" height="400" loading="lazy">
           </div>
         </div>
       </div>
     </section>
 
     <!-- Section 4: Video - CMD -->
-    <section class="module module--video" data-animate="fade-up" aria-label="Vídeo CMD">
+    <section class="module module--video" data-animate="fade-up" data-i18n-aria="s4.label" aria-label="Video CMD">
       <div class="module__inner">
         <div class="module__header module__header--split">
           <div class="module__header-left">
-            <span class="the-header__pretitle">VÍDEO</span>
-            <h2 class="the-header__title">Así fue nuestro <em>CMD</em>;<br>One Group, One Team</h2>
+            <span class="the-header__pretitle" data-i18n="s4.pre">VIDEO</span>
+            <h2 class="the-header__title" data-i18n-html="s4.title">This was our <em>CMD</em>;<br>One Group, One Team</h2>
           </div>
           <div class="module__header-right">
-            <p>El Grupo ACS ha celebrado en el Círculo de Bellas Artes su primer Capital Markets Day presentando su Plan Estratégico 2024-2026</p>
+            <p data-i18n="s4.desc">Grupo ACS held its first Capital Markets Day at the Círculo de Bellas Artes, presenting its 2024-2026 Strategic Plan</p>
           </div>
         </div>
         <div class="video-player" data-video="https://www.youtube.com/embed/byKyMH_Ud8c">
           <img src="assets/images/img-13.jpg" alt="Capital Markets Day - One Group One Team" width="1440" height="600" loading="lazy">
           <div class="video-player__overlay">
-            <button class="video-player__play" aria-label="Reproducir vídeo">
+            <button class="video-player__play" data-i18n-aria="play" aria-label="Play video">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </button>
           </div>
@@ -311,58 +311,58 @@
     </section>
 
     <!-- Section 5: Business Areas Selector -->
-    <section class="module module--selector" data-animate="fade-up" aria-label="Áreas de negocio">
+    <section class="module module--selector" data-animate="fade-up" data-i18n-aria="s5.label" aria-label="Business Areas">
       <div class="module__inner">
         <div class="module__header">
-          <span class="the-header__pretitle">Actividades</span>
-          <h2 class="the-header__title"><em>Áreas</em> de negocio</h2>
+          <span class="the-header__pretitle" data-i18n="s5.pre">Activities</span>
+          <h2 class="the-header__title" data-i18n-html="s5.title"><em>Business</em> Areas</h2>
         </div>
         <div class="selector">
           <div class="selector__tabs" role="tablist">
-            <button class="selector__tab selector__tab--active" role="tab" aria-selected="true" data-tab="0">Soluciones Integrales</button>
-            <button class="selector__tab" role="tab" aria-selected="false" data-tab="1">Ingeniería Civil y Construcción</button>
-            <button class="selector__tab" role="tab" aria-selected="false" data-tab="2">Inversión en Infraestructuras</button>
-            <button class="selector__tab" role="tab" aria-selected="false" data-tab="3">Otros Negocios</button>
+            <button class="selector__tab selector__tab--active" role="tab" aria-selected="true" data-tab="0" data-i18n="s5.t0">Integrated Solutions</button>
+            <button class="selector__tab" role="tab" aria-selected="false" data-tab="1" data-i18n="s5.t1">Civil Engineering & Construction</button>
+            <button class="selector__tab" role="tab" aria-selected="false" data-tab="2" data-i18n="s5.t2">Infrastructure Investment</button>
+            <button class="selector__tab" role="tab" aria-selected="false" data-tab="3" data-i18n="s5.t3">Other Businesses</button>
           </div>
           <div class="selector__panels">
             <div class="selector__panel selector__panel--active" role="tabpanel" data-panel="0">
               <div class="selector__panel-content">
-                <h3>Soluciones Integrales</h3>
-                <p>El Grupo impulsa proyectos ligados a sectores de alto valor añadido.</p>
-                <a href="#" class="link-arrow">VER MÁS <span class="btn__arrow">&rarr;</span></a>
+                <h3 data-i18n="s5.p0.h">Integrated Solutions</h3>
+                <p data-i18n="s5.p0.d">The Group drives projects linked to high added-value sectors.</p>
+                <a href="#" class="link-arrow" data-i18n-html="s5.more">READ MORE <span class="btn__arrow">&rarr;</span></a>
               </div>
               <div class="selector__panel-image">
-                <img src="assets/images/img-14.jpg" alt="Soluciones Integrales" width="700" height="400" loading="lazy">
+                <img src="assets/images/img-14.jpg" data-i18n-alt="s5.p0.alt" alt="Integrated Solutions" width="700" height="400" loading="lazy">
               </div>
             </div>
             <div class="selector__panel" role="tabpanel" data-panel="1">
               <div class="selector__panel-content">
-                <h3>Ingeniería Civil y Construcción</h3>
-                <p>Líder mundial en construcción e ingeniería civil de infraestructuras.</p>
-                <a href="#" class="link-arrow">VER MÁS <span class="btn__arrow">&rarr;</span></a>
+                <h3 data-i18n="s5.p1.h">Civil Engineering & Construction</h3>
+                <p data-i18n="s5.p1.d">World leader in infrastructure construction and civil engineering.</p>
+                <a href="#" class="link-arrow" data-i18n-html="s5.more">READ MORE <span class="btn__arrow">&rarr;</span></a>
               </div>
               <div class="selector__panel-image">
-                <img src="assets/images/img-15.jpg" alt="Ingeniería Civil y Construcción" width="700" height="400" loading="lazy">
+                <img src="assets/images/img-15.jpg" data-i18n-alt="s5.p1.alt" alt="Civil Engineering & Construction" width="700" height="400" loading="lazy">
               </div>
             </div>
             <div class="selector__panel" role="tabpanel" data-panel="2">
               <div class="selector__panel-content">
-                <h3>Inversión en Infraestructuras</h3>
-                <p>Gestión y operación de infraestructuras de transporte a nivel global.</p>
-                <a href="#" class="link-arrow">VER MÁS <span class="btn__arrow">&rarr;</span></a>
+                <h3 data-i18n="s5.p2.h">Infrastructure Investment</h3>
+                <p data-i18n="s5.p2.d">Management and operation of transport infrastructure on a global level.</p>
+                <a href="#" class="link-arrow" data-i18n-html="s5.more">READ MORE <span class="btn__arrow">&rarr;</span></a>
               </div>
               <div class="selector__panel-image">
-                <img src="assets/images/img-16.jpg" alt="Inversión en Infraestructuras" width="700" height="400" loading="lazy">
+                <img src="assets/images/img-16.jpg" data-i18n-alt="s5.p2.alt" alt="Infrastructure Investment" width="700" height="400" loading="lazy">
               </div>
             </div>
             <div class="selector__panel" role="tabpanel" data-panel="3">
               <div class="selector__panel-content">
-                <h3>Otros Negocios</h3>
-                <p>Actividades complementarias que aportan diversificación al grupo.</p>
-                <a href="#" class="link-arrow">VER MÁS <span class="btn__arrow">&rarr;</span></a>
+                <h3 data-i18n="s5.p3.h">Other Businesses</h3>
+                <p data-i18n="s5.p3.d">Complementary activities that bring diversification to the group.</p>
+                <a href="#" class="link-arrow" data-i18n-html="s5.more">READ MORE <span class="btn__arrow">&rarr;</span></a>
               </div>
               <div class="selector__panel-image">
-                <img src="assets/images/img-17.jpg" alt="Otros Negocios" width="700" height="400" loading="lazy">
+                <img src="assets/images/img-17.jpg" data-i18n-alt="s5.p3.alt" alt="Other Businesses" width="700" height="400" loading="lazy">
               </div>
             </div>
           </div>
@@ -371,71 +371,71 @@
     </section>
 
     <!-- Section 6: CTA - Sustainability -->
-    <section class="module module--cta module--cta-fullwidth" data-animate="fade-up" aria-label="Sostenibilidad">
+    <section class="module module--cta module--cta-fullwidth" data-animate="fade-up" data-i18n-aria="s6.label" aria-label="Sustainability">
       <div class="cta-fullwidth">
         <div class="cta-fullwidth__bg">
-          <img src="assets/images/cta-bg-18.jpg" alt="Contribuimos al desarrollo sostenible" width="1440" height="500" loading="lazy">
+          <img src="assets/images/cta-bg-18.jpg" data-i18n-alt="s6.alt" alt="We contribute to sustainable development" width="1440" height="500" loading="lazy">
         </div>
         <div class="cta-fullwidth__overlay"></div>
         <div class="cta-fullwidth__content">
-          <span class="the-header__pretitle the-header__pretitle--light">Sostenibilidad</span>
-          <h2 class="the-header__title the-header__title--light"><em>Contribuimos al<br>desarrollo sostenible</em></h2>
-          <p>El Grupo ACS es sostenibilidad. El Dow Jones Sustainability World Index destaca nuestro compromiso con el medio ambiente a nivel internacional.</p>
-          <a href="#" class="btn btn--outline">VER MÁS <span class="btn__arrow">&rarr;</span></a>
+          <span class="the-header__pretitle the-header__pretitle--light" data-i18n="s6.pre">Sustainability</span>
+          <h2 class="the-header__title the-header__title--light" data-i18n-html="s6.title"><em>We contribute to<br>sustainable development</em></h2>
+          <p data-i18n="s6.desc">Grupo ACS is sustainability. The Dow Jones Sustainability World Index highlights our commitment to the environment at an international level.</p>
+          <a href="#" class="btn btn--outline" data-i18n-html="s6.btn">READ MORE <span class="btn__arrow">&rarr;</span></a>
         </div>
       </div>
     </section>
 
     <!-- Section 7: Numbers -->
-    <section class="module module--numero" data-animate="fade-up" aria-label="Cifras principales">
+    <section class="module module--numero" data-animate="fade-up" data-i18n-aria="s7.label" aria-label="Key figures">
       <div class="module__inner">
         <div class="module__header module__header--split">
           <div class="module__header-left">
-            <span class="the-header__pretitle">Huella en números</span>
-            <h2 class="the-header__title"><em>Principales cifras</em> del<br>Grupo ACS en 2023</h2>
+            <span class="the-header__pretitle" data-i18n="s7.pre">Footprint in numbers</span>
+            <h2 class="the-header__title" data-i18n-html="s7.title"><em>Key figures</em> of<br>Grupo ACS in 2023</h2>
           </div>
           <div class="module__header-right">
-            <a href="#" class="link-arrow">ACCEDE A LA INFORMACIÓN FINANCIERA <span class="btn__arrow">&rarr;</span></a>
+            <a href="#" class="link-arrow" data-i18n-html="s7.link">ACCESS FINANCIAL INFORMATION <span class="btn__arrow">&rarr;</span></a>
           </div>
         </div>
         <div class="numbers-grid">
           <div class="number-card">
             <span class="number-card__value" data-target="35738" data-suffix="M€" data-separator=".">35.738M€</span>
-            <span class="number-card__label">Ventas</span>
+            <span class="number-card__label" data-i18n="s7.l0">Sales</span>
           </div>
           <div class="number-card">
             <span class="number-card__value" data-target="73538" data-suffix="M€" data-separator=".">73.538M€</span>
-            <span class="number-card__label">Cartera</span>
+            <span class="number-card__label" data-i18n="s7.l1">Backlog</span>
           </div>
           <div class="number-card">
             <span class="number-card__value" data-target="780" data-suffix="M€" data-separator=".">780M€</span>
-            <span class="number-card__label">Beneficio neto</span>
+            <span class="number-card__label" data-i18n="s7.l2">Net profit</span>
           </div>
           <div class="number-card">
             <span class="number-card__value" data-target="135419" data-suffix="" data-separator=".">135.419</span>
-            <span class="number-card__label">Empleados</span>
+            <span class="number-card__label" data-i18n="s7.l3">Employees</span>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Section 8: Video - Corporate -->
-    <section class="module module--video" data-animate="fade-up" aria-label="Vídeo corporativo">
+    <section class="module module--video" data-animate="fade-up" data-i18n-aria="s8.label" aria-label="Corporate video">
       <div class="module__inner">
         <div class="module__header module__header--split">
           <div class="module__header-left">
-            <span class="the-header__pretitle">VÍDEO</span>
-            <h2 class="the-header__title">Construyendo el futuro,<br><em>transformando</em><br>el presente</h2>
+            <span class="the-header__pretitle" data-i18n="s8.pre">VIDEO</span>
+            <h2 class="the-header__title" data-i18n-html="s8.title">Building the future,<br><em>transforming</em><br>the present</h2>
           </div>
           <div class="module__header-right">
-            <p>Construimos un futuro mejor a través del desarrollo y la operación de infraestructuras que contribuyen al progreso económico y social de los países en los que estamos presentes.</p>
-            <a href="#" class="link-arrow link-arrow--bold">VER NUESTROS VIDEOS <span class="btn__arrow">&rarr;</span></a>
+            <p data-i18n="s8.desc">We build a better future through the development and operation of infrastructure that contributes to the economic and social progress of the countries in which we are present.</p>
+            <a href="#" class="link-arrow link-arrow--bold" data-i18n-html="s8.link">WATCH OUR VIDEOS <span class="btn__arrow">&rarr;</span></a>
           </div>
         </div>
         <div class="video-player" data-video="https://www.youtube.com/embed/QwOcGj1kMYg">
-          <img src="assets/images/img-19.png" alt="Construyendo el futuro, transformando el presente" width="1440" height="600" loading="lazy">
+          <img src="assets/images/img-19.png" data-i18n-alt="s8.alt" alt="Building the future, transforming the present" width="1440" height="600" loading="lazy">
           <div class="video-player__overlay">
-            <button class="video-player__play" aria-label="Reproducir vídeo">
+            <button class="video-player__play" data-i18n-aria="play" aria-label="Play video">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </button>
           </div>
@@ -444,21 +444,21 @@
     </section>
 
     <!-- Section 9: Employment Text -->
-    <section class="module module--texto" data-animate="fade-up" aria-label="Empleo">
+    <section class="module module--texto" data-animate="fade-up" data-i18n-aria="s9.label" aria-label="Careers">
       <div class="module__inner">
         <div class="text-split">
           <div class="text-split__left">
-            <span class="the-header__pretitle">Empleo</span>
-            <h2 class="the-header__title"><em>Encuentra tu lugar</em> en el Grupo ACS</h2>
+            <span class="the-header__pretitle" data-i18n="s9.pre">Careers</span>
+            <h2 class="the-header__title" data-i18n-html="s9.title"><em>Find your place</em> at Grupo ACS</h2>
           </div>
           <div class="text-split__right">
             <div class="text-split__right-content">
-              <h3>Expertos en construir un mundo mejor</h3>
-              <p>En el Grupo ACS somos más de 135.000 profesionales de las disciplinas más diversas, trabajando codo a codo para construir un futuro mejor para todos. Únete a nuestro equipo.</p>
-              <a href="#" class="link-arrow link-arrow--caps">ACCEDER AL PORTAL DE EMPLEO <span class="btn__arrow">&rarr;</span></a>
+              <h3 data-i18n="s9.sub">Experts in building a better world</h3>
+              <p data-i18n="s9.desc">At Grupo ACS, we are more than 135,000 professionals from the most diverse disciplines, working side by side to build a better future for everyone. Join our team.</p>
+              <a href="#" class="link-arrow link-arrow--caps" data-i18n-html="s9.link">ACCESS THE CAREERS PORTAL <span class="btn__arrow">&rarr;</span></a>
             </div>
             <div class="text-split__right-image">
-              <img src="assets/images/img-20.jpg" alt="Empleo en el Grupo ACS" width="600" height="400" loading="lazy">
+              <img src="assets/images/img-20.jpg" data-i18n-alt="s9.alt" alt="Careers at Grupo ACS" width="600" height="400" loading="lazy">
             </div>
           </div>
         </div>
@@ -469,14 +469,14 @@
     <section class="module module--cta module--cta-fullwidth" data-animate="fade-up" aria-label="Newsletter">
       <div class="cta-fullwidth">
         <div class="cta-fullwidth__bg">
-          <img src="assets/images/cta-bg-21.jpg" alt="Suscríbete a nuestra newsletter" width="1440" height="500" loading="lazy">
+          <img src="assets/images/cta-bg-21.jpg" data-i18n-alt="s10.alt" alt="Subscribe to our newsletter" width="1440" height="500" loading="lazy">
         </div>
         <div class="cta-fullwidth__overlay cta-fullwidth__overlay--dark"></div>
         <div class="cta-fullwidth__content">
-          <span class="the-header__pretitle the-header__pretitle--light">Al día</span>
-          <h2 class="the-header__title the-header__title--light">Suscríbete a<br>nuestra <em>newsletter</em></h2>
-          <p>Recibe periódicamente en tu buzón de correo electrónico la última hora sobre el Grupo ACS.</p>
-          <a href="#" class="btn btn--outline">SUSCRÍBETE AQUÍ <span class="btn__arrow">&rarr;</span></a>
+          <span class="the-header__pretitle the-header__pretitle--light" data-i18n="s10.pre">Up to date</span>
+          <h2 class="the-header__title the-header__title--light" data-i18n-html="s10.title">Subscribe to<br>our <em>newsletter</em></h2>
+          <p data-i18n="s10.desc">Receive the latest news about Grupo ACS periodically in your email inbox.</p>
+          <a href="#" class="btn btn--outline" data-i18n-html="s10.btn">SUBSCRIBE HERE <span class="btn__arrow">&rarr;</span></a>
         </div>
       </div>
     </section>
@@ -484,24 +484,24 @@
   </main>
 
   <!-- Footer -->
-  <footer class="module the-footer" aria-label="Pie de página">
+  <footer class="module the-footer" data-i18n-aria="ft.label" aria-label="Footer">
     <div class="the-footer__inner">
       <div class="the-footer__logo">
-        <a href="/" aria-label="Grupo ACS - Inicio">
+        <a href="/" data-i18n-aria="ft.home" aria-label="Grupo ACS - Home">
           <img src="assets/images/img-0.svg" alt="Grupo ACS" width="120" height="33" loading="lazy" class="footer-logo-img">
         </a>
       </div>
       <div class="the-footer__content">
-        <nav class="the-footer__links" aria-label="Enlaces del pie de página">
-          <a href="#">Información general</a>
+        <nav class="the-footer__links" data-i18n-aria="ft.nav" aria-label="Footer links">
+          <a href="#" data-i18n="ft.0">General Information</a>
           <span class="the-footer__sep">|</span>
-          <a href="#">Política de Cookies</a>
+          <a href="#" data-i18n="ft.1">Cookie Policy</a>
           <span class="the-footer__sep">|</span>
-          <a href="#">Aviso Legal</a>
+          <a href="#" data-i18n="ft.2">Legal Notice</a>
           <span class="the-footer__sep">|</span>
-          <a href="#">Empresas del Grupo ACS</a>
+          <a href="#" data-i18n="ft.3">ACS Group Companies</a>
           <span class="the-footer__sep">|</span>
-          <a href="#">Contacto</a>
+          <a href="#" data-i18n="ft.4">Contact</a>
         </nav>
         <div class="the-footer__social">
           <a href="https://www.linkedin.com/company/grupo-acs/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
@@ -519,10 +519,10 @@
   </footer>
 
   <!-- Video Modal -->
-  <div class="video-modal" id="videoModal" aria-hidden="true" role="dialog" aria-label="Reproductor de vídeo">
+  <div class="video-modal" id="videoModal" aria-hidden="true" role="dialog" data-i18n-aria="modal.label" aria-label="Video player">
     <div class="video-modal__overlay"></div>
     <div class="video-modal__container">
-      <button class="video-modal__close" aria-label="Cerrar vídeo">
+      <button class="video-modal__close" data-i18n-aria="modal.close" aria-label="Close video">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
       <div class="video-modal__iframe-wrap">

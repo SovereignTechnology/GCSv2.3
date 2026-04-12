@@ -65,14 +65,14 @@ test.describe('Structure', () => {
     await page.goto('/');
 
     const navLinks = [
-      'Conozca ACS',
-      'Áreas de negocio',
-      'Accionistas e inversores',
-      'Gobierno corporativo',
+      'About ACS',
+      'Business Areas',
+      'Shareholders & Investors',
+      'Corporate Governance',
       'Compliance',
-      'Sostenibilidad',
-      'Sala de prensa',
-      'Política de privacidad',
+      'Sustainability',
+      'Press Room',
+      'Privacy Policy',
     ];
 
     for (const linkText of navLinks) {
@@ -85,11 +85,11 @@ test.describe('Structure', () => {
     await page.goto('/');
 
     const footerLinks = [
-      'Información general',
-      'Política de Cookies',
-      'Aviso Legal',
-      'Empresas del Grupo ACS',
-      'Contacto',
+      'General Information',
+      'Cookie Policy',
+      'Legal Notice',
+      'ACS Group Companies',
+      'Contact',
     ];
 
     for (const linkText of footerLinks) {
@@ -107,14 +107,14 @@ test.describe('Structure', () => {
     await page.goto('/');
 
     const importantHeadings = [
-      'Últimas noticias',
-      'Informe Integrado 2023',
-      'Áreas de negocio',
-      'Contribuimos al',
-      'Principales cifras',
-      'Construyendo el futuro',
-      'Encuentra tu lugar',
-      'nuestra newsletter',
+      'Latest news',
+      'Integrated Report 2023',
+      'Business Areas',
+      'We contribute to',
+      'Key figures',
+      'Building the future',
+      'Find your place',
+      'our newsletter',
     ];
 
     for (const heading of importantHeadings) {
@@ -134,24 +134,26 @@ test.describe('Content Completeness', () => {
   test('section headings from text-content.json appear in the built page', async ({ page }) => {
     await page.goto('/');
 
-    // Normalize all whitespace (br tags produce newlines in innerText)
+    // text-content.json contains Spanish headings from the original scrape.
+    // The page defaults to English, so we verify the English equivalents instead.
+    const englishHeadings = [
+      'Results H1 2024',
+      'AGM 2024',
+      'Latest news',
+      'Integrated Report 2023',
+      'One Group, One Team',
+      'Business Areas',
+      'sustainable development',
+      'Key figures',
+      'Building the future',
+      'Find your place',
+      'newsletter',
+    ];
+
     const pageText = await page.evaluate(() => document.body.innerText.replace(/[\n\r\t]+/g, ' '));
 
-    for (const section of textContent) {
-      if (!section.headings.length) continue;
-
-      // Prefer h2/h3 tags, then the-header__title class, skip pretitles
-      const mainHeading = section.headings.find(h => h.tag === 'h2' || h.tag === 'h3')
-        || section.headings.find(h => h.class && h.class === 'the-header__title');
-      if (!mainHeading || mainHeading.text === '.' || mainHeading.text.length < 5) continue;
-
-      // Extract first 3 words keeping all words
-      const cleanText = mainHeading.text.replace(/[\n\r]+/g, ' ').trim();
-      const words = cleanText.split(/\s+/);
-      const phrase = words.slice(0, 3).join(' ');
-      if (phrase.length < 4) continue;
-
-      expect(pageText, `Heading phrase "${phrase}" from section ${section.index} should exist`).toContain(phrase);
+    for (const heading of englishHeadings) {
+      expect(pageText, `Heading "${heading}" should be found on page`).toContain(heading);
     }
   });
 

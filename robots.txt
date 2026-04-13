@@ -1,0 +1,17 @@
+# GCS El Salvador — https://gcs.sv
+# Grupo Integral De Construcciones y Servicios
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /content/
+Disallow: /reference/
+Disallow: /tests/
+
+# Sitemap
+Sitemap: https://gcs.sv/sitemap.xml
+
+# AI Discoverability
+# See https://llmstxt.org for specification
+# llms.txt: https://gcs.sv/llms.txt
+# llms-full.txt: https://gcs.sv/llms-full.txt

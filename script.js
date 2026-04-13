@@ -1,5 +1,5 @@
 /**
- * script.js — GCSv2.3 Interactions
+ * script.js — GCS El Salvador Interactions
  * Vanilla JS, module pattern, IntersectionObserver-based.
  */
 
@@ -12,6 +12,7 @@
 
   // ── Init Chain ───────────────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', function () {
+    initTheme();
     initNav();
     initHeroSlider();
     initScrollReveal();
@@ -19,7 +20,44 @@
     initVideoModals();
     initSelector();
     initLanguage();
+    initSmoothScroll();
   });
+
+  // ── Theme Switcher ──────────────────────────────────────────────────────────
+  function initTheme() {
+    var toggle = qs('#theme-toggle');
+    if (!toggle) return;
+
+    var stored = localStorage.getItem('gcs-theme');
+    var currentTheme;
+
+    if (stored) {
+      currentTheme = stored;
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      currentTheme = 'dark';
+    } else {
+      currentTheme = 'light';
+    }
+
+    document.documentElement.setAttribute('data-theme', currentTheme);
+
+    requestAnimationFrame(function () {
+      document.body.classList.remove('no-transition');
+    });
+
+    toggle.addEventListener('click', function () {
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      localStorage.setItem('gcs-theme', currentTheme);
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+      if (!localStorage.getItem('gcs-theme')) {
+        currentTheme = e.matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+      }
+    });
+  }
 
   // ── Navigation ───────────────────────────────────────────────────────────────
   function initNav() {
@@ -33,14 +71,12 @@
     function onScroll() {
       var y = window.scrollY;
 
-      // Nav background
       if (y > scrollThreshold) {
         nav.classList.add('is-scrolled');
       } else {
         nav.classList.remove('is-scrolled');
       }
 
-      // Top bar hide on scroll down
       if (y > lastScroll && y > 50) {
         topBar.classList.add('is-hidden');
         nav.style.top = '0';
@@ -55,7 +91,6 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    // Mobile toggle
     if (toggle && overlay) {
       toggle.addEventListener('click', function () {
         var isOpen = overlay.classList.contains('is-open');
@@ -76,7 +111,6 @@
         }
       });
 
-      // Close on link click
       qsa('.nav-overlay__menu a').forEach(function (a) {
         a.addEventListener('click', function () {
           overlay.classList.remove('is-open');
@@ -90,6 +124,28 @@
     }
   }
 
+  // ── Smooth Scroll for Anchor Links ───────────────────────────────────────────
+  function initSmoothScroll() {
+    var navHeight = 60;
+    var topBarHeight = 32;
+
+    qsa('a[href^="#"]').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        var targetId = link.getAttribute('href');
+        if (targetId === '#' || targetId === '#main-content') return;
+
+        var target = qs(targetId);
+        if (!target) return;
+
+        e.preventDefault();
+        var offset = navHeight + topBarHeight + 20;
+        var top = target.getBoundingClientRect().top + window.scrollY - offset;
+
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    });
+  }
+
   // ── Hero Slider ──────────────────────────────────────────────────────────────
   function initHeroSlider() {
     var slides = qsa('.hero-slide');
@@ -98,7 +154,17 @@
     var currentEl = qs('.hero-slider__current');
     var totalEl = qs('.hero-slider__total');
 
-    if (!slides.length) return;
+    if (!slides.length || slides.length <= 1) {
+      // Single slide — just ensure video plays
+      var singleVideo = slides.length === 1 && slides[0].querySelector('.hero-slide__video');
+      if (singleVideo) {
+        singleVideo.play();
+        singleVideo.addEventListener('playing', function () {
+          singleVideo.setAttribute('data-status', 'playing');
+        });
+      }
+      return;
+    }
 
     var current = 0;
     var total = slides.length;
@@ -140,16 +206,6 @@
     if (prevBtn) prevBtn.addEventListener('click', function () { prev(); startAutoplay(); });
 
     startAutoplay();
-
-    // Hero video — fade out poster image once video plays, show it on error
-    qsa('.hero-slide__video').forEach(function (video) {
-      video.addEventListener('playing', function () {
-        video.setAttribute('data-status', 'playing');
-      });
-      video.addEventListener('error', function () {
-        video.removeAttribute('data-status');
-      });
-    });
   }
 
   // ── Scroll Reveal ────────────────────────────────────────────────────────────
@@ -182,7 +238,7 @@
     if (!values.length) return;
 
     function formatNumber(num, separator) {
-      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator || '.');
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator || ',');
     }
 
     function easeOutExpo(t) {
@@ -190,25 +246,33 @@
     }
 
     function animateCounter(el) {
-      var target = parseInt(el.getAttribute('data-target'), 10);
+      var target = parseFloat(el.getAttribute('data-target'));
       var suffix = el.getAttribute('data-suffix') || '';
-      var separator = el.getAttribute('data-separator') || '.';
+      var separator = el.getAttribute('data-separator') || ',';
+      var decimals = parseInt(el.getAttribute('data-decimals'), 10) || 0;
+      var prefix = el.getAttribute('data-prefix') || '';
       var duration = 2000;
       var start = null;
 
-      el.textContent = '0' + suffix;
+      el.textContent = prefix + '0' + suffix;
 
       function step(timestamp) {
         if (!start) start = timestamp;
         var progress = Math.min((timestamp - start) / duration, 1);
         var easedProgress = easeOutExpo(progress);
-        var currentValue = Math.floor(easedProgress * target);
-        el.textContent = formatNumber(currentValue, separator) + suffix;
+        var currentValue = easedProgress * target;
+        var display = decimals > 0
+          ? currentValue.toFixed(decimals)
+          : formatNumber(Math.floor(currentValue), separator);
+        el.textContent = prefix + display + suffix;
 
         if (progress < 1) {
           requestAnimationFrame(step);
         } else {
-          el.textContent = formatNumber(target, separator) + suffix;
+          var finalDisplay = decimals > 0
+            ? target.toFixed(decimals)
+            : formatNumber(target, separator);
+          el.textContent = prefix + finalDisplay + suffix;
         }
       }
 
@@ -249,7 +313,6 @@
         var videoUrl = player.getAttribute('data-video');
         if (!videoUrl) return;
 
-        // Add autoplay param
         var sep = videoUrl.includes('?') ? '&' : '?';
         iframe.src = videoUrl + sep + 'autoplay=1';
         modal.classList.add('is-open');
@@ -286,7 +349,6 @@
       tab.addEventListener('click', function () {
         var targetIndex = tab.getAttribute('data-tab');
 
-        // Update tabs
         tabs.forEach(function (t) {
           t.classList.remove('selector__tab--active');
           t.setAttribute('aria-selected', 'false');
@@ -294,7 +356,11 @@
         tab.classList.add('selector__tab--active');
         tab.setAttribute('aria-selected', 'true');
 
-        // Update panels
+        // Scroll the selected tab to center of the tab bar
+        var container = tab.parentElement;
+        var scrollLeft = tab.offsetLeft - (container.clientWidth / 2) + (tab.offsetWidth / 2);
+        container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+
         panels.forEach(function (p) {
           p.classList.remove('selector__panel--active');
         });
@@ -314,204 +380,194 @@
   var TRANSLATIONS = {
     en: {
       'skip': 'Skip to main content',
-      'tb.cnmv': 'CNMV COMMUNICATIONS', 'tb.contact': 'CONTACT', 'tb.lang': 'ESPAÑOL',
-      'tb.companies': 'ACS Group Companies', 'tb.search': 'Search',
-      'nav.label': 'Main navigation', 'nav.home': 'Grupo ACS - Home', 'nav.toggle': 'Open menu',
-      'nav.0': 'About ACS', 'nav.1': 'Business Areas', 'nav.2': 'Shareholders & Investors',
-      'nav.3': 'Corporate Governance', 'nav.4': 'Compliance', 'nav.5': 'Sustainability',
-      'nav.6': 'Press Room', 'nav.7': 'Privacy Policy',
-      'header.label': 'Featured presentations',
-      's0.alt': 'Results H1 2024',
-      's0.title': 'Results <em>H1 2024</em>',
-      's0.text': 'ACS achieves a net profit of 416 million euros in the first half of 2024, up 8.1%',
-      's0.btn': 'READ MORE <span class="btn__arrow">&rarr;</span>',
-      's0b.alt': 'Annual General Meeting',
-      's0b.text': 'We held our 2024 Annual General Meeting at the IFEMA south auditorium. The replay of the event is available on our website.',
-      's0b.btn': 'READ MORE <span class="btn__arrow">&rarr;</span>',
-      's0c.title': 'Capital<br><em>Markets Day 2024</em>',
-      's0c.text': 'Discover our business strategy, financial performance and growth prospects. We offer a comprehensive view of our ability to create value and the initiatives that will drive our success.',
-      's0c.btn': 'Read more <span class="btn__arrow">&rarr;</span>',
-      'slider.prev': 'Previous slide', 'slider.next': 'Next slide',
-      's1.label': 'Video AGM 2024', 's1.pre': 'VIDEO',
-      's1.title': 'Our opening video of the <em>AGM 2024</em>',
-      's1.desc': 'This is the video presentation of the cohesive strategy and vision for the present and future of Grupo ACS, explained to our shareholders by some of the most representative executives of our companies.',
-      's1.alt': 'AGM 2024 opening video', 'play': 'Play video', 's1.cap': 'AGM 2024 OPENING VIDEO',
-      's2.label': 'Latest news', 's2.pre': 'Press Room',
-      's2.title': '<em>Latest</em> news',
-      's2.link': 'SEE ALL OUR NEWS <span class="btn__arrow">&rarr;</span>',
-      'news.tag': 'News', 'news.read': 'READ <span class="btn__arrow">&rarr;</span>',
-      'n0.alt': 'ACS achieves a net profit of 416 million euros',
-      'n0.title': 'ACS achieves a net profit of 416 million euros in the first half of 2024, up 8.1%',
-      'n0.excerpt': 'Sales reach 18,749 million euros, increasing 10.1% compared to the previous year. EBITDA stands at 1,157 million euros, growing 23.8%, after...',
-      'n1.alt': 'SR400 Express Lane in Atlanta',
-      'n1.title': 'ACS Group, Acciona and Meridiam will build and operate the SR400 Express Lane in Atlanta (Georgia) for 50 years',
-      'n2.alt': 'Neoen Western Downs Battery',
-      'n2.title': "CIMIC to build the second phase of Neoen's Western Downs Battery",
-      'n3.alt': 'Abertis expands presence in Chile',
-      'n3.title': 'Abertis expands its presence in Chile after winning the Ruta 5 Santiago - Los Vilos concession',
-      'n4.alt': 'HOCHTIEF Scotland contract',
-      'n4.title': 'HOCHTIEF awarded a major infrastructure maintenance contract in Scotland',
-      'n5.alt': 'ACS zero-emission mobility',
-      'n5.title': 'ACS leads and transforms zero-emission mobility',
-      'n6.alt': 'Civil Engineering North America',
-      'n6.title': 'A leading Civil Engineering company is born in North America',
-      's3.label': 'Integrated Report 2023', 's3.pre': 'Shareholders & Investors',
-      's3.title': 'Integrated Report 2023',
-      's3.desc': 'View the latest report published by Grupo ACS',
-      's3.btn': 'Access <span class="btn__arrow">&rarr;</span>',
-      's3.alt': 'Integrated Report 2023',
-      's4.label': 'Video CMD', 's4.pre': 'VIDEO',
-      's4.title': 'This was our <em>CMD</em>;<br>One Group, One Team',
-      's4.desc': 'Grupo ACS held its first Capital Markets Day at the C\u00edrculo de Bellas Artes, presenting its 2024-2026 Strategic Plan',
-      's5.label': 'Business Areas', 's5.pre': 'Activities',
-      's5.title': '<em>Business</em> Areas',
-      's5.t0': 'Integrated Solutions', 's5.t1': 'Civil Engineering & Construction',
-      's5.t2': 'Infrastructure Investment', 's5.t3': 'Other Businesses',
-      's5.more': 'READ MORE <span class="btn__arrow">&rarr;</span>',
-      's5.p0.h': 'Integrated Solutions',
-      's5.p0.d': 'The Group drives projects linked to high added-value sectors.',
-      's5.p0.alt': 'Integrated Solutions',
-      's5.p1.h': 'Civil Engineering & Construction',
-      's5.p1.d': 'World leader in infrastructure construction and civil engineering.',
-      's5.p1.alt': 'Civil Engineering & Construction',
-      's5.p2.h': 'Infrastructure Investment',
-      's5.p2.d': 'Management and operation of transport infrastructure on a global level.',
-      's5.p2.alt': 'Infrastructure Investment',
-      's5.p3.h': 'Other Businesses',
-      's5.p3.d': 'Complementary activities that bring diversification to the group.',
-      's5.p3.alt': 'Other Businesses',
-      's6.label': 'Sustainability', 's6.pre': 'Sustainability',
-      's6.title': '<em>We contribute to<br>sustainable development</em>',
-      's6.desc': 'Grupo ACS is sustainability. The Dow Jones Sustainability World Index highlights our commitment to the environment at an international level.',
-      's6.btn': 'READ MORE <span class="btn__arrow">&rarr;</span>',
-      's6.alt': 'We contribute to sustainable development',
-      's7.label': 'Key figures', 's7.pre': 'Footprint in numbers',
-      's7.title': '<em>Key figures</em> of<br>Grupo ACS in 2023',
-      's7.link': 'ACCESS FINANCIAL INFORMATION <span class="btn__arrow">&rarr;</span>',
-      's7.l0': 'Sales', 's7.l1': 'Backlog', 's7.l2': 'Net profit', 's7.l3': 'Employees',
-      's8.label': 'Corporate video', 's8.pre': 'VIDEO',
-      's8.title': 'Building the future,<br><em>transforming</em><br>the present',
-      's8.desc': 'We build a better future through the development and operation of infrastructure that contributes to the economic and social progress of the countries in which we are present.',
-      's8.link': 'WATCH OUR VIDEOS <span class="btn__arrow">&rarr;</span>',
-      's8.alt': 'Building the future, transforming the present',
-      's9.label': 'Careers', 's9.pre': 'Careers',
-      's9.title': '<em>Find your place</em> at Grupo ACS',
-      's9.sub': 'Experts in building a better world',
-      's9.desc': 'At Grupo ACS, we are more than 135,000 professionals from the most diverse disciplines, working side by side to build a better future for everyone. Join our team.',
-      's9.link': 'ACCESS THE CAREERS PORTAL <span class="btn__arrow">&rarr;</span>',
-      's9.alt': 'Careers at Grupo ACS',
-      's10.pre': 'Up to date',
-      's10.title': 'Subscribe to<br>our <em>newsletter</em>',
-      's10.desc': 'Receive the latest news about Grupo ACS periodically in your email inbox.',
-      's10.btn': 'SUBSCRIBE HERE <span class="btn__arrow">&rarr;</span>',
-      's10.alt': 'Subscribe to our newsletter',
-      'ft.label': 'Footer', 'ft.home': 'Grupo ACS - Home', 'ft.nav': 'Footer links',
-      'ft.0': 'General Information', 'ft.1': 'Cookie Policy', 'ft.2': 'Legal Notice',
-      'ft.3': 'ACS Group Companies', 'ft.4': 'Contact',
+      'tb.tagline': 'Grupo Integral De Construcciones y Servicios',
+      'tb.contact': 'CONTACT', 'tb.lang': 'ESPAÑOL',
+      'nav.label': 'Main navigation', 'nav.home': 'GCS - Home', 'nav.toggle': 'Open menu',
+      'nav.0': 'Services', 'nav.1': 'Projects', 'nav.2': 'Machinery',
+      'nav.3': 'Team', 'nav.4': 'Contact',
+      'header.label': 'Company introduction',
+      'hero.title': 'Experts in Construction<br><em>and problem solving</em>',
+      'hero.cta': 'Explore Our Services <span class="btn__arrow">&rarr;</span>',
+
+      'svc.label': 'Our Services', 'svc.pre': 'What We Do',
+      'svc.title': 'Our <em>Services</em>',
+      'svc.t0': 'Permitting & Management', 'svc.t1': 'Engineering & Design',
+      'svc.t2': 'Residential Construction', 'svc.t3': 'Commercial Construction',
+      'svc.t4': 'Heavy Equipment Rental',
+      'svc.more': 'LEARN MORE <span class="btn__arrow">&rarr;</span>',
+      'svc.p0.h': 'Permitting & Regulatory Management',
+      'svc.p0.d': 'We handle all pre-construction documentation and institutional coordination to secure approvals. From OPAMSS pre-procedures and site qualification to hydrological studies \u2014 we navigate the regulatory landscape so your project moves forward without delays.',
+      'svc.p1.h': 'Engineering & Design',
+      'svc.p1.d': 'From initial concepts to final blueprints, our engineering team transforms your vision into precise, buildable plans. We specialize in conceptual design, land surveys, topographical studies, structural plans, and BIM-based modeling for complete construction documentation.',
+      'svc.p2.h': 'Residential Construction',
+      'svc.p2.d': 'We build homes and residential developments that stand the test of time. From custom family houses to multi-unit apartment complexes, our residential projects combine quality craftsmanship, modern design, and efficient project management.',
+      'svc.p3.h': 'Commercial Construction',
+      'svc.p3.d': 'Our commercial construction division delivers restaurants, retail spaces, office buildings, and wellness complexes. We manage every phase from foundation to finish, ensuring projects meet commercial-grade standards, timelines, and budgets.',
+      'svc.p4.h': 'Heavy Equipment Rental',
+      'svc.p4.d': 'Access our fleet of professional-grade construction equipment. From excavators and cranes to concrete mixers and dump trucks \u2014 we provide well-maintained heavy machinery with flexible rental terms to keep your project on schedule.',
+
+      'proj.label': 'Our Projects', 'proj.pre': 'Portfolio',
+      'proj.title': 'Our <em>Projects</em>',
+      'proj.desc': 'We have been the executors of the following projects across El Salvador and beyond.',
+      'proj.tag.res': 'Residential', 'proj.tag.com': 'Commercial',
+      'proj.p0.title': 'Rental Units Building', 'proj.p0.loc': 'Santa Tecla, El Salvador',
+      'proj.p1.title': 'Apartamentos Kawok', 'proj.p1.loc': 'San Salvador, El Salvador',
+      'proj.p2.title': 'Sound Health Wellness Complex', 'proj.p2.loc': 'San Diego, USA',
+      'proj.p3.title': 'Mont-Galia Apartments', 'proj.p3.loc': 'Santa Tecla, El Salvador',
+      'proj.p4.title': 'Punta Mango House', 'proj.p4.loc': 'Punta Mango, El Salvador',
+      'proj.p5.title': 'Luxury Cabins', 'proj.p5.loc': 'La Posada de los P\u00e1jaros',
+
+      'mach.label': 'Our Machinery', 'mach.pre': 'Equipment Fleet',
+      'mach.title': 'Our <em>Machinery</em>',
+      'mach.m0.title': 'Excavators',
+      'mach.m0.spec': 'CAT 320 Series \u2014 Versatile hydraulic excavators for earthmoving, trenching, and demolition. 20-ton operating weight class.',
+      'mach.m1.title': 'Concrete Mixers',
+      'mach.m1.spec': 'Heavy-duty transit mixers with 8-12 cubic meter drum capacity. Reliable fleet for continuous concrete delivery.',
+      'mach.m2.title': 'Cranes',
+      'mach.m2.spec': 'Tower and mobile cranes for lifting and placement. Capacity ranges from 5 to 80 tons for any project scale.',
+      'mach.m3.title': 'Dump Trucks',
+      'mach.m3.spec': 'Articulated dump trucks for hauling earth, gravel, and debris. 25-40 ton payload capacity for high-volume operations.',
+
+      'team.label': 'Our Team', 'team.pre': 'Our People',
+      'team.title': 'Meet the <em>Team</em>',
+      'team.m0.name': 'Carlos Mendoza', 'team.m0.role': 'Founder & CEO',
+      'team.m0.bio': 'Over 20 years of experience leading construction and infrastructure projects across Central America. Visionary leader driving GCS\u2019s growth and innovation.',
+      'team.m1.name': 'Mar\u00eda Elena Guti\u00e9rrez', 'team.m1.role': 'VP of Operations',
+      'team.m1.bio': 'Civil engineering expert with deep expertise in project execution and resource optimization. Ensures every project meets the highest quality standards.',
+      'team.m2.name': 'Roberto Castillo', 'team.m2.role': 'Lead Architect',
+      'team.m2.bio': 'BIM specialist who bridges design vision with structural reality. Leads architectural planning from concept to construction-ready documentation.',
+      'team.m3.name': 'Ana Luc\u00eda Ramos', 'team.m3.role': 'Senior Project Manager',
+      'team.m3.bio': 'Coordinates multi-phase construction timelines with precision. Expert in stakeholder communication and budget management.',
+      'team.m4.name': 'Diego Hern\u00e1ndez', 'team.m4.role': 'Chief Site Supervisor',
+      'team.m4.bio': 'Hands-on leadership at every job site. Manages crews, enforces safety protocols, and ensures construction quality from foundation to finish.',
+      'team.m5.name': 'Jos\u00e9 Miguel Torres', 'team.m5.role': 'Equipment & Fleet Manager',
+      'team.m5.bio': 'Keeps our heavy equipment fleet in peak condition. Manages maintenance schedules, logistics, and rental operations across all active sites.',
+
+      'num.label': 'Key figures', 'num.pre': 'GCS By The Numbers',
+      'num.title': '<em>Key Figures</em>',
+      'num.l0': 'Portfolio Value', 'num.l1': 'Active Projects',
+      'num.l2': 'Years Experience', 'num.l3': 'Team Members',
+
+      'cta.label': 'Contact us', 'cta.pre': 'Get In Touch',
+      'cta.title': 'Ready to <em>Build?</em>',
+      'cta.desc': 'Contact us today to learn more about how we can bring your construction project to life. From permits to completion, we\u2019re with you every step.',
+      'cta.btn': 'Contact Us <span class="btn__arrow">&rarr;</span>',
+
+      'form.name': 'Full Name', 'form.name_ph': 'Your full name',
+      'form.email': 'Email', 'form.email_ph': 'you@example.com',
+      'form.phone': 'Phone', 'form.phone_ph': '+503 0000-0000',
+      'form.service': 'Service Interest', 'form.service_ph': 'Select a service...',
+      'form.svc_0': 'Permitting & Management', 'form.svc_1': 'Engineering & Design',
+      'form.svc_2': 'Residential Construction', 'form.svc_3': 'Commercial Construction',
+      'form.svc_4': 'Heavy Equipment Rental', 'form.svc_5': 'Other',
+      'form.message': 'Message', 'form.message_ph': 'Tell us about your project...',
+      'form.submit': 'Send Message <span class="btn__arrow">&rarr;</span>',
+      'form.sending': 'Sending...', 'form.success': 'Message sent! We\u2019ll get back to you soon.',
+      'form.err_required': 'Please fill in all required fields.',
+      'form.err_server': 'Something went wrong. Please try again.',
+
+      'ft.label': 'Footer', 'ft.home': 'GCS - Home', 'ft.nav': 'Footer links',
+      'ft.0': 'Services', 'ft.1': 'Projects', 'ft.2': 'Team',
+      'ft.3': 'Contact', 'ft.4': 'Privacy Policy',
       'modal.label': 'Video player', 'modal.close': 'Close video'
     },
     es: {
       'skip': 'Saltar al contenido principal',
-      'tb.cnmv': 'COMUNICACIONES CNMV', 'tb.contact': 'CONTACTO', 'tb.lang': 'ENGLISH',
-      'tb.companies': 'Empresas del Grupo ACS', 'tb.search': 'Buscar',
-      'nav.label': 'Navegaci\u00f3n principal', 'nav.home': 'Grupo ACS - Inicio', 'nav.toggle': 'Abrir men\u00fa',
-      'nav.0': 'Conozca ACS', 'nav.1': '\u00c1reas de negocio', 'nav.2': 'Accionistas e inversores',
-      'nav.3': 'Gobierno corporativo', 'nav.4': 'Compliance', 'nav.5': 'Sostenibilidad',
-      'nav.6': 'Sala de prensa', 'nav.7': 'Pol\u00edtica de privacidad',
-      'header.label': 'Presentaciones destacadas',
-      's0.alt': 'Resultados 1S 2024',
-      's0.title': 'Resultados <em>1S 2024</em>',
-      's0.text': 'ACS obtiene un beneficio neto de 416 millones de euros en el primer semestre de 2024, un 8,1% m\u00e1s',
-      's0.btn': 'VER M\u00c1S <span class="btn__arrow">&rarr;</span>',
-      's0b.alt': 'Junta General de Accionistas',
-      's0b.text': 'Hemos celebrado en el auditorio sur IFEMA nuestra Junta General de Accionistas 2024. La redifusi\u00f3n del evento se encuentra disponible en nuestra web.',
-      's0b.btn': 'VER M\u00c1S <span class="btn__arrow">&rarr;</span>',
-      's0c.title': 'Capital<br><em>Markets Day 2024</em>',
-      's0c.text': 'Descubre nuestra estrategia empresarial, desempe\u00f1o financiero y perspectivas de crecimiento. Te ofrecemos una visi\u00f3n integral de nuestra capacidad para generar valor y las iniciativas que impulsar\u00e1n nuestro \u00e9xito.',
-      's0c.btn': 'Ver m\u00e1s <span class="btn__arrow">&rarr;</span>',
-      'slider.prev': 'Diapositiva anterior', 'slider.next': 'Siguiente diapositiva',
-      's1.label': 'V\u00eddeo JGA 2024', 's1.pre': 'V\u00cdDEO',
-      's1.title': 'Nuestro v\u00eddeo de apertura de la <em>JGA 2024</em>',
-      's1.desc': 'Esta es la presentaci\u00f3n en v\u00eddeo de la estrategia cohesionada y visi\u00f3n de presente y futuro del Grupo ACS, explicada a nuestros accionistas por algunos de los directivos m\u00e1s representativos de nuestras empresas.',
-      's1.alt': 'V\u00eddeo de apertura JGA 2024', 'play': 'Reproducir v\u00eddeo', 's1.cap': 'V\u00cdDEO DE APERTURA JGA 2024',
-      's2.label': '\u00daltimas noticias', 's2.pre': 'Sala de prensa',
-      's2.title': '<em>\u00daltimas</em> noticias',
-      's2.link': 'CONOCE TODAS NUESTRAS NOTICIAS <span class="btn__arrow">&rarr;</span>',
-      'news.tag': 'Noticia', 'news.read': 'LEER <span class="btn__arrow">&rarr;</span>',
-      'n0.alt': 'ACS obtiene un beneficio neto de 416 millones de euros',
-      'n0.title': 'ACS obtiene un beneficio neto de 416 millones de euros en el primer semestre de 2024, un 8,1% m\u00e1s',
-      'n0.excerpt': 'Las ventas alcanzan los 18.749 millones de euros, aumentando un 10,1% respecto al a\u00f1o anterior. El EBITDA se sit\u00faa en los 1.157 millones de euros, creciendo un 23,8%, tras...',
-      'n1.alt': 'SR400 Express Lane de Atlanta',
-      'n1.title': 'El Grupo ACS, Acciona y Meridiam construir\u00e1n y operar\u00e1n la SR400 Express Lane de Atlanta (Georgia) durante 50 a\u00f1os',
-      'n2.alt': 'Bater\u00eda Western Downs de Neoen',
-      'n2.title': 'CIMIC construir\u00e1 la segunda fase de la bater\u00eda Western Downs de Neoen',
-      'n3.alt': 'Abertis ampl\u00eda presencia en Chile',
-      'n3.title': 'Abertis ampl\u00eda su presencia en Chile tras ganar la concesi\u00f3n de la Ruta 5 Santiago - Los Vilos',
-      'n4.alt': 'HOCHTIEF contrato Escocia',
-      'n4.title': 'HOCHTIEF se adjudica un importante contrato de mantenimiento de infraestructuras en Escocia',
-      'n5.alt': 'ACS movilidad cero emisiones',
-      'n5.title': 'ACS lidera y transforma la movilidad de cero emisiones',
-      'n6.alt': 'Ingenier\u00eda Civil Norteam\u00e9rica',
-      'n6.title': 'Nace la empresa de Ingenier\u00eda Civil referente en Norteam\u00e9rica',
-      's3.label': 'Informe Integrado 2023', 's3.pre': 'Accionistas e inversores',
-      's3.title': 'Informe Integrado 2023',
-      's3.desc': 'Consulta el \u00faltimo informe publicado por el Grupo ACS',
-      's3.btn': 'Acceder <span class="btn__arrow">&rarr;</span>',
-      's3.alt': 'Informe Integrado 2023',
-      's4.label': 'V\u00eddeo CMD', 's4.pre': 'V\u00cdDEO',
-      's4.title': 'As\u00ed fue nuestro <em>CMD</em>;<br>One Group, One Team',
-      's4.desc': 'El Grupo ACS ha celebrado en el C\u00edrculo de Bellas Artes su primer Capital Markets Day presentando su Plan Estrat\u00e9gico 2024-2026',
-      's5.label': '\u00c1reas de negocio', 's5.pre': 'Actividades',
-      's5.title': '<em>\u00c1reas</em> de negocio',
-      's5.t0': 'Soluciones Integrales', 's5.t1': 'Ingenier\u00eda Civil y Construcci\u00f3n',
-      's5.t2': 'Inversi\u00f3n en Infraestructuras', 's5.t3': 'Otros Negocios',
-      's5.more': 'VER M\u00c1S <span class="btn__arrow">&rarr;</span>',
-      's5.p0.h': 'Soluciones Integrales',
-      's5.p0.d': 'El Grupo impulsa proyectos ligados a sectores de alto valor a\u00f1adido.',
-      's5.p0.alt': 'Soluciones Integrales',
-      's5.p1.h': 'Ingenier\u00eda Civil y Construcci\u00f3n',
-      's5.p1.d': 'L\u00edder mundial en construcci\u00f3n e ingenier\u00eda civil de infraestructuras.',
-      's5.p1.alt': 'Ingenier\u00eda Civil y Construcci\u00f3n',
-      's5.p2.h': 'Inversi\u00f3n en Infraestructuras',
-      's5.p2.d': 'Gesti\u00f3n y operaci\u00f3n de infraestructuras de transporte a nivel global.',
-      's5.p2.alt': 'Inversi\u00f3n en Infraestructuras',
-      's5.p3.h': 'Otros Negocios',
-      's5.p3.d': 'Actividades complementarias que aportan diversificaci\u00f3n al grupo.',
-      's5.p3.alt': 'Otros Negocios',
-      's6.label': 'Sostenibilidad', 's6.pre': 'Sostenibilidad',
-      's6.title': '<em>Contribuimos al<br>desarrollo sostenible</em>',
-      's6.desc': 'El Grupo ACS es sostenibilidad. El Dow Jones Sustainability World Index destaca nuestro compromiso con el medio ambiente a nivel internacional.',
-      's6.btn': 'VER M\u00c1S <span class="btn__arrow">&rarr;</span>',
-      's6.alt': 'Contribuimos al desarrollo sostenible',
-      's7.label': 'Cifras principales', 's7.pre': 'Huella en n\u00fameros',
-      's7.title': '<em>Principales cifras</em> del<br>Grupo ACS en 2023',
-      's7.link': 'ACCEDE A LA INFORMACI\u00d3N FINANCIERA <span class="btn__arrow">&rarr;</span>',
-      's7.l0': 'Ventas', 's7.l1': 'Cartera', 's7.l2': 'Beneficio neto', 's7.l3': 'Empleados',
-      's8.label': 'V\u00eddeo corporativo', 's8.pre': 'V\u00cdDEO',
-      's8.title': 'Construyendo el futuro,<br><em>transformando</em><br>el presente',
-      's8.desc': 'Construimos un futuro mejor a trav\u00e9s del desarrollo y la operaci\u00f3n de infraestructuras que contribuyen al progreso econ\u00f3mico y social de los pa\u00edses en los que estamos presentes.',
-      's8.link': 'VER NUESTROS VIDEOS <span class="btn__arrow">&rarr;</span>',
-      's8.alt': 'Construyendo el futuro, transformando el presente',
-      's9.label': 'Empleo', 's9.pre': 'Empleo',
-      's9.title': '<em>Encuentra tu lugar</em> en el Grupo ACS',
-      's9.sub': 'Expertos en construir un mundo mejor',
-      's9.desc': 'En el Grupo ACS somos m\u00e1s de 135.000 profesionales de las disciplinas m\u00e1s diversas, trabajando codo a codo para construir un futuro mejor para todos. \u00danete a nuestro equipo.',
-      's9.link': 'ACCEDER AL PORTAL DE EMPLEO <span class="btn__arrow">&rarr;</span>',
-      's9.alt': 'Empleo en el Grupo ACS',
-      's10.pre': 'Al d\u00eda',
-      's10.title': 'Suscr\u00edbete a<br>nuestra <em>newsletter</em>',
-      's10.desc': 'Recibe peri\u00f3dicamente en tu buz\u00f3n de correo electr\u00f3nico la \u00faltima hora sobre el Grupo ACS.',
-      's10.btn': 'SUSCR\u00cdBETE AQU\u00cd <span class="btn__arrow">&rarr;</span>',
-      's10.alt': 'Suscr\u00edbete a nuestra newsletter',
-      'ft.label': 'Pie de p\u00e1gina', 'ft.home': 'Grupo ACS - Inicio', 'ft.nav': 'Enlaces del pie de p\u00e1gina',
-      'ft.0': 'Informaci\u00f3n general', 'ft.1': 'Pol\u00edtica de Cookies', 'ft.2': 'Aviso Legal',
-      'ft.3': 'Empresas del Grupo ACS', 'ft.4': 'Contacto',
+      'tb.tagline': 'Grupo Integral De Construcciones y Servicios',
+      'tb.contact': 'CONTACTO', 'tb.lang': 'ENGLISH',
+      'nav.label': 'Navegaci\u00f3n principal', 'nav.home': 'GCS - Inicio', 'nav.toggle': 'Abrir men\u00fa',
+      'nav.0': 'Servicios', 'nav.1': 'Proyectos', 'nav.2': 'Maquinaria',
+      'nav.3': 'Equipo', 'nav.4': 'Contacto',
+      'header.label': 'Presentaci\u00f3n de la empresa',
+      'hero.title': 'Expertos en Construcci\u00f3n<br><em>y soluci\u00f3n de problemas</em>',
+      'hero.cta': 'Explorar Servicios <span class="btn__arrow">&rarr;</span>',
+
+      'svc.label': 'Nuestros Servicios', 'svc.pre': 'Lo Que Hacemos',
+      'svc.title': 'Nuestros <em>Servicios</em>',
+      'svc.t0': 'Permisos y Gesti\u00f3n', 'svc.t1': 'Ingenier\u00eda y Dise\u00f1o',
+      'svc.t2': 'Construcci\u00f3n Residencial', 'svc.t3': 'Construcci\u00f3n Comercial',
+      'svc.t4': 'Alquiler de Maquinaria',
+      'svc.more': 'VER M\u00c1S <span class="btn__arrow">&rarr;</span>',
+      'svc.p0.h': 'Permisos y Gesti\u00f3n Regulatoria',
+      'svc.p0.d': 'Gestionamos toda la documentaci\u00f3n previa a la construcci\u00f3n y la coordinaci\u00f3n institucional para obtener aprobaciones. Desde pre-tr\u00e1mites de OPAMSS y calificaci\u00f3n de sitios hasta estudios hidrol\u00f3gicos \u2014 navegamos el panorama regulatorio para que su proyecto avance sin demoras.',
+      'svc.p1.h': 'Ingenier\u00eda y Dise\u00f1o',
+      'svc.p1.d': 'Desde conceptos iniciales hasta planos finales, nuestro equipo de ingenier\u00eda transforma su visi\u00f3n en planes precisos y construibles. Nos especializamos en dise\u00f1o conceptual, levantamientos topogr\u00e1ficos, planos estructurales y modelado BIM.',
+      'svc.p2.h': 'Construcci\u00f3n Residencial',
+      'svc.p2.d': 'Construimos hogares y desarrollos residenciales que perduran. Desde casas familiares personalizadas hasta complejos de apartamentos, nuestros proyectos residenciales combinan calidad, dise\u00f1o moderno y gesti\u00f3n eficiente.',
+      'svc.p3.h': 'Construcci\u00f3n Comercial',
+      'svc.p3.d': 'Nuestra divisi\u00f3n de construcci\u00f3n comercial entrega restaurantes, espacios comerciales, edificios de oficinas y complejos de bienestar. Gestionamos cada fase desde la cimentaci\u00f3n hasta el acabado.',
+      'svc.p4.h': 'Alquiler de Maquinaria Pesada',
+      'svc.p4.d': 'Acceda a nuestra flota de equipos de construcci\u00f3n de grado profesional. Desde excavadoras y gr\u00faas hasta mezcladoras de concreto y camiones volquete \u2014 proporcionamos maquinaria pesada bien mantenida con t\u00e9rminos de alquiler flexibles.',
+
+      'proj.label': 'Nuestros Proyectos', 'proj.pre': 'Portafolio',
+      'proj.title': 'Nuestros <em>Proyectos</em>',
+      'proj.desc': 'Hemos sido los ejecutores de los siguientes proyectos en El Salvador y m\u00e1s all\u00e1.',
+      'proj.tag.res': 'Residencial', 'proj.tag.com': 'Comercial',
+      'proj.p0.title': 'Edificio de Unidades de Alquiler', 'proj.p0.loc': 'Santa Tecla, El Salvador',
+      'proj.p1.title': 'Apartamentos Kawok', 'proj.p1.loc': 'San Salvador, El Salvador',
+      'proj.p2.title': 'Complejo de Bienestar Sound Health', 'proj.p2.loc': 'San Diego, EE.UU.',
+      'proj.p3.title': 'Apartamentos Mont-Galia', 'proj.p3.loc': 'Santa Tecla, El Salvador',
+      'proj.p4.title': 'Casa Punta Mango', 'proj.p4.loc': 'Punta Mango, El Salvador',
+      'proj.p5.title': 'Caba\u00f1as de Lujo', 'proj.p5.loc': 'La Posada de los P\u00e1jaros',
+
+      'mach.label': 'Nuestra Maquinaria', 'mach.pre': 'Flota de Equipos',
+      'mach.title': 'Nuestra <em>Maquinaria</em>',
+      'mach.m0.title': 'Excavadoras',
+      'mach.m0.spec': 'Serie CAT 320 \u2014 Excavadoras hidr\u00e1ulicas vers\u00e1tiles para movimiento de tierras, excavaci\u00f3n de zanjas y demolici\u00f3n. Clase de peso operativo de 20 toneladas.',
+      'mach.m1.title': 'Mezcladoras de Concreto',
+      'mach.m1.spec': 'Mezcladoras de tr\u00e1nsito de servicio pesado con capacidad de tambor de 8-12 metros c\u00fabicos. Flota confiable para entrega continua de concreto.',
+      'mach.m2.title': 'Gr\u00faas',
+      'mach.m2.spec': 'Gr\u00faas torre y m\u00f3viles para levantamiento y colocaci\u00f3n. Capacidad de 5 a 80 toneladas para cualquier escala de proyecto.',
+      'mach.m3.title': 'Camiones Volquete',
+      'mach.m3.spec': 'Camiones volquete articulados para transportar tierra, grava y escombros. Capacidad de carga de 25-40 toneladas para operaciones de alto volumen.',
+
+      'team.label': 'Nuestro Equipo', 'team.pre': 'Nuestra Gente',
+      'team.title': 'Conoce al <em>Equipo</em>',
+      'team.m0.name': 'Carlos Mendoza', 'team.m0.role': 'Fundador y CEO',
+      'team.m0.bio': 'M\u00e1s de 20 a\u00f1os de experiencia liderando proyectos de construcci\u00f3n e infraestructura en Centroam\u00e9rica. L\u00edder visionario impulsando el crecimiento e innovaci\u00f3n de GCS.',
+      'team.m1.name': 'Mar\u00eda Elena Guti\u00e9rrez', 'team.m1.role': 'VP de Operaciones',
+      'team.m1.bio': 'Experta en ingenier\u00eda civil con profunda experiencia en ejecuci\u00f3n de proyectos y optimizaci\u00f3n de recursos. Asegura que cada proyecto cumpla los m\u00e1s altos est\u00e1ndares de calidad.',
+      'team.m2.name': 'Roberto Castillo', 'team.m2.role': 'Arquitecto Principal',
+      'team.m2.bio': 'Especialista en BIM que conecta la visi\u00f3n de dise\u00f1o con la realidad estructural. Lidera la planificaci\u00f3n arquitect\u00f3nica desde el concepto hasta la documentaci\u00f3n lista para construir.',
+      'team.m3.name': 'Ana Luc\u00eda Ramos', 'team.m3.role': 'Gerente Senior de Proyectos',
+      'team.m3.bio': 'Coordina cronogramas de construcci\u00f3n multifase con precisi\u00f3n. Experta en comunicaci\u00f3n con partes interesadas y gesti\u00f3n de presupuestos.',
+      'team.m4.name': 'Diego Hern\u00e1ndez', 'team.m4.role': 'Supervisor Jefe de Obra',
+      'team.m4.bio': 'Liderazgo pr\u00e1ctico en cada sitio de trabajo. Gestiona cuadrillas, aplica protocolos de seguridad y asegura la calidad de construcci\u00f3n de cimentaci\u00f3n a acabado.',
+      'team.m5.name': 'Jos\u00e9 Miguel Torres', 'team.m5.role': 'Gerente de Equipos y Flota',
+      'team.m5.bio': 'Mantiene nuestra flota de maquinaria pesada en \u00f3ptimas condiciones. Gestiona calendarios de mantenimiento, log\u00edstica y operaciones de alquiler en todos los sitios activos.',
+
+      'num.label': 'Cifras clave', 'num.pre': 'GCS en N\u00fameros',
+      'num.title': '<em>Cifras Clave</em>',
+      'num.l0': 'Valor del Portafolio', 'num.l1': 'Proyectos Activos',
+      'num.l2': 'A\u00f1os de Experiencia', 'num.l3': 'Miembros del Equipo',
+
+      'cta.label': 'Cont\u00e1ctenos', 'cta.pre': 'Ponte en Contacto',
+      'cta.title': '\u00bfListo para <em>Construir?</em>',
+      'cta.desc': 'Cont\u00e1ctenos hoy para saber m\u00e1s sobre c\u00f3mo podemos dar vida a su proyecto de construcci\u00f3n. Desde permisos hasta la finalizaci\u00f3n, estamos con usted en cada paso.',
+      'cta.btn': 'Cont\u00e1ctenos <span class="btn__arrow">&rarr;</span>',
+
+      'form.name': 'Nombre Completo', 'form.name_ph': 'Su nombre completo',
+      'form.email': 'Correo Electr\u00f3nico', 'form.email_ph': 'usted@ejemplo.com',
+      'form.phone': 'Tel\u00e9fono', 'form.phone_ph': '+503 0000-0000',
+      'form.service': 'Servicio de Inter\u00e9s', 'form.service_ph': 'Seleccione un servicio...',
+      'form.svc_0': 'Permisos y Gesti\u00f3n', 'form.svc_1': 'Ingenier\u00eda y Dise\u00f1o',
+      'form.svc_2': 'Construcci\u00f3n Residencial', 'form.svc_3': 'Construcci\u00f3n Comercial',
+      'form.svc_4': 'Alquiler de Maquinaria', 'form.svc_5': 'Otro',
+      'form.message': 'Mensaje', 'form.message_ph': 'Cu\u00e9ntenos sobre su proyecto...',
+      'form.submit': 'Enviar Mensaje <span class="btn__arrow">&rarr;</span>',
+      'form.sending': 'Enviando...', 'form.success': '\u00a1Mensaje enviado! Nos comunicaremos pronto.',
+      'form.err_required': 'Por favor complete todos los campos requeridos.',
+      'form.err_server': 'Algo sali\u00f3 mal. Int\u00e9ntelo de nuevo.',
+
+      'ft.label': 'Pie de p\u00e1gina', 'ft.home': 'GCS - Inicio', 'ft.nav': 'Enlaces del pie',
+      'ft.0': 'Servicios', 'ft.1': 'Proyectos', 'ft.2': 'Equipo',
+      'ft.3': 'Contacto', 'ft.4': 'Pol\u00edtica de Privacidad',
       'modal.label': 'Reproductor de v\u00eddeo', 'modal.close': 'Cerrar v\u00eddeo'
     }
   };
 
   function initLanguage() {
-    var currentLang = localStorage.getItem('acs-lang') || 'en';
+    var currentLang = localStorage.getItem('gcs-lang') || 'en';
     if (currentLang !== 'en') {
       applyLanguage(currentLang);
     }
@@ -521,7 +577,7 @@
       toggle.addEventListener('click', function (e) {
         e.preventDefault();
         currentLang = currentLang === 'en' ? 'es' : 'en';
-        localStorage.setItem('acs-lang', currentLang);
+        localStorage.setItem('gcs-lang', currentLang);
         applyLanguage(currentLang);
       });
     }
@@ -533,29 +589,150 @@
 
     document.documentElement.lang = lang;
 
-    // textContent
     qsa('[data-i18n]').forEach(function (el) {
       var key = el.getAttribute('data-i18n');
       if (t[key] != null) el.textContent = t[key];
     });
 
-    // innerHTML
     qsa('[data-i18n-html]').forEach(function (el) {
       var key = el.getAttribute('data-i18n-html');
       if (t[key] != null) el.innerHTML = t[key];
     });
 
-    // aria-label
     qsa('[data-i18n-aria]').forEach(function (el) {
       var key = el.getAttribute('data-i18n-aria');
       if (t[key] != null) el.setAttribute('aria-label', t[key]);
     });
 
-    // alt
     qsa('[data-i18n-alt]').forEach(function (el) {
       var key = el.getAttribute('data-i18n-alt');
       if (t[key] != null) el.setAttribute('alt', t[key]);
     });
+
+    qsa('[data-i18n-placeholder]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n-placeholder');
+      if (t[key] != null) el.setAttribute('placeholder', t[key]);
+    });
+
+    // Translate select options
+    qsa('select [data-i18n]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n');
+      if (t[key] != null) el.textContent = t[key];
+    });
   }
+
+  // ── Contact Form ─────────────────────────────────────────────────────────────
+  var CONTACT_API = 'https://api.gcs.sv/contact.php'; // YunoHost endpoint
+  var TURNSTILE_SITE_KEY = '0x0000000000000000000000'; // Replace with real key
+
+  function initContactForm() {
+    var form = qs('#contact-form');
+    if (!form) return;
+
+    // Record page load time for timing-based spam check
+    form.querySelector('[name="_timer"]').value = Date.now();
+
+    // Render Turnstile widget
+    if (window.turnstile) {
+      window.turnstile.render('#cf-turnstile', {
+        sitekey: TURNSTILE_SITE_KEY,
+        theme: 'dark',
+        callback: function (token) {
+          form.dataset.cfToken = token;
+        }
+      });
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      handleContactSubmit(form);
+    });
+  }
+
+  function handleContactSubmit(form) {
+    var status = qs('#cf-status');
+    var btn = form.querySelector('.contact-form__submit');
+    var lang = localStorage.getItem('gcs-lang') || 'en';
+    var t = TRANSLATIONS[lang] || TRANSLATIONS.en;
+
+    // Clear previous state
+    status.textContent = '';
+    status.className = 'contact-form__status';
+    form.querySelectorAll('.is-invalid').forEach(function (el) {
+      el.classList.remove('is-invalid');
+    });
+
+    // Honeypot check (bot filled the hidden field)
+    if (form.querySelector('[name="company_url"]').value) return;
+
+    // Timing check (submitted faster than 3 seconds = bot)
+    var elapsed = Date.now() - parseInt(form.querySelector('[name="_timer"]').value, 10);
+    if (elapsed < 3000) return;
+
+    // Client-side validation
+    var name = form.querySelector('[name="name"]').value.trim();
+    var email = form.querySelector('[name="email"]').value.trim();
+    var message = form.querySelector('[name="message"]').value.trim();
+    var valid = true;
+
+    if (!name) { form.querySelector('#cf-name').classList.add('is-invalid'); valid = false; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      form.querySelector('#cf-email').classList.add('is-invalid'); valid = false;
+    }
+    if (!message) { form.querySelector('#cf-message').classList.add('is-invalid'); valid = false; }
+
+    if (!valid) {
+      status.textContent = t['form.err_required'] || 'Please fill in all required fields.';
+      status.className = 'contact-form__status contact-form__status--error';
+      return;
+    }
+
+    // Turnstile token
+    var cfToken = form.dataset.cfToken || '';
+
+    // Disable button + show sending
+    btn.disabled = true;
+    status.textContent = t['form.sending'] || 'Sending...';
+    status.className = 'contact-form__status contact-form__status--sending';
+
+    var payload = {
+      name: name,
+      email: email,
+      phone: form.querySelector('[name="phone"]').value.trim(),
+      service: form.querySelector('[name="service"]').value,
+      message: message,
+      'cf-turnstile-response': cfToken,
+      _timer: form.querySelector('[name="_timer"]').value
+    };
+
+    fetch(CONTACT_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (data.ok) {
+        status.textContent = t['form.success'] || 'Message sent! We\'ll get back to you soon.';
+        status.className = 'contact-form__status contact-form__status--success';
+        form.reset();
+        form.querySelector('[name="_timer"]').value = Date.now();
+        if (window.turnstile) window.turnstile.reset('#cf-turnstile');
+      } else {
+        status.textContent = data.error || t['form.err_server'] || 'Something went wrong. Please try again.';
+        status.className = 'contact-form__status contact-form__status--error';
+      }
+    })
+    .catch(function () {
+      status.textContent = t['form.err_server'] || 'Something went wrong. Please try again.';
+      status.className = 'contact-form__status contact-form__status--error';
+    })
+    .finally(function () {
+      btn.disabled = false;
+    });
+  }
+
+  // Init contact form after DOM ready
+  initContactForm();
 
 })();

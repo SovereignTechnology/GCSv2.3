@@ -622,8 +622,8 @@
   }
 
   // ── Contact Form ─────────────────────────────────────────────────────────────
-  var CONTACT_API = 'https://api.gcs.sv/contact.php'; // YunoHost endpoint
-  var TURNSTILE_SITE_KEY = '0x0000000000000000000000'; // Replace with real key
+  var CONTACT_API = 'https://api.gcs.sv/contact.php';
+  var TURNSTILE_SITE_KEY = '0x4AAAAAAC8ojLJSV2BubsL1';
 
   function initContactForm() {
     var form = qs('#contact-form');

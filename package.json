@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "rm -rf dist && mkdir -p dist && cp index.html styles.css script.js robots.txt sitemap.xml llms.txt llms-full.txt dist/ && cp -r assets content GCS_logo_kit api dist/",
+    "deploy": "npm run build && wrangler deploy",
+    "preview": "npm run build && wrangler dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

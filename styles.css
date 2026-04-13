@@ -1233,6 +1233,9 @@
   .the-footer__content {
     border-left: 1px solid rgba(255,255,255,0.2);
     padding-left: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .the-footer__links {
@@ -1240,7 +1243,6 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 12px;
-    margin-bottom: 24px;
   }
 
   .the-footer__links a {
@@ -1260,7 +1262,6 @@
 
   .the-footer__social {
     display: flex;
-    justify-content: center;
     gap: 20px;
   }
 

@@ -1,0 +1,154 @@
+# GCS El Salvador — Full Company Profile
+
+> Grupo Integral De Construcciones y Servicios (GCS) is a construction, engineering, and permitting company based in El Salvador. With over 10 years of experience, 50+ team members, and a $37M+ project portfolio, GCS delivers residential and commercial construction projects across Central America and the United States.
+
+## Company Overview
+
+GCS El Salvador (Grupo Integral De Construcciones y Servicios) is a full-service construction and engineering firm headquartered in El Salvador. The company provides end-to-end project delivery — from initial permitting and regulatory navigation through engineering design to final construction. GCS also operates a heavy equipment rental division serving both internal projects and external clients.
+
+### Identity
+
+- **Full Name**: Grupo Integral De Construcciones y Servicios
+- **Short Name**: GCS / GCS El Salvador
+- **Website**: https://gcs.sv
+- **Email**: services@gcs.sv
+- **Country**: El Salvador
+- **Languages**: English, Spanish
+- **Founded**: ~2016
+- **Team Size**: 50+ professionals
+
+### Key Metrics
+
+- **Portfolio Value**: $37.73M USD
+- **Active Projects**: 19+
+- **Years in Operation**: 10+
+- **Team Members**: 50+
+
+---
+
+## Services
+
+### 1. Permitting & Regulatory Management
+
+GCS handles all pre-construction documentation and institutional coordination to secure project approvals. Services include:
+- OPAMSS pre-procedures and site qualification
+- Hydrological studies
+- Environmental impact assessments
+- Institutional coordination with government bodies
+- Full regulatory landscape navigation to prevent project delays
+
+### 2. Engineering & Design
+
+From initial concepts to final blueprints, the engineering team transforms client visions into precise, buildable plans:
+- Conceptual design and feasibility studies
+- Land surveys and topographical studies
+- Structural engineering plans
+- BIM-based (Building Information Modeling) 3D modeling
+- Complete construction documentation packages
+
+### 3. Residential Construction
+
+GCS builds homes and residential developments designed to last:
+- Custom single-family homes
+- Multi-unit apartment complexes
+- Residential developments and subdivisions
+- Quality craftsmanship with modern design
+- Full project management from foundation to finish
+
+### 4. Commercial Construction
+
+The commercial division delivers a range of business-oriented properties:
+- Restaurants and food service facilities
+- Retail spaces and shopping centers
+- Office buildings and business parks
+- Wellness and health complexes
+- Commercial-grade standards compliance
+- Complete timeline and budget management
+
+### 5. Heavy Equipment Rental
+
+GCS provides access to professional-grade construction equipment:
+- **Excavators**: CAT 320 Series — 20-ton class for earthmoving, trenching, demolition
+- **Concrete Mixers**: Heavy-duty transit mixers, 8-12 cubic meter drum capacity
+- **Cranes**: Tower and mobile cranes, 5-80 ton capacity range
+- **Dump Trucks**: Articulated models, 25-40 ton payload capacity
+- Flexible rental terms available
+- All equipment professionally maintained
+
+---
+
+## Project Portfolio
+
+### Residential Projects
+
+1. **Rental Units Building**
+   - Location: Santa Tecla, El Salvador
+   - Type: Residential
+
+2. **Apartamentos Kawok**
+   - Location: San Salvador, El Salvador
+   - Type: Residential
+
+3. **Mont-Galia Apartments**
+   - Location: Santa Tecla, El Salvador
+   - Type: Residential
+
+4. **Punta Mango House**
+   - Location: Punta Mango, El Salvador
+   - Type: Residential
+
+### Commercial Projects
+
+5. **Sound Health Wellness Complex**
+   - Location: San Diego, USA
+   - Type: Commercial / Wellness
+
+6. **Luxury Cabins**
+   - Location: La Posada de los Pájaros
+   - Type: Commercial / Hospitality
+
+---
+
+## Leadership Team
+
+1. **Carlos Mendoza** — Founder & CEO
+   Over 20 years of experience leading construction and infrastructure projects across Central America. Visionary leader driving GCS's growth and innovation.
+
+2. **María Elena Gutiérrez** — VP of Operations
+   Civil engineering expert with deep expertise in project execution and resource optimization. Ensures every project meets the highest quality standards.
+
+3. **Roberto Castillo** — Lead Architect
+   BIM specialist who bridges design vision with structural reality. Leads architectural planning from concept to construction-ready documentation.
+
+4. **Ana Lucía Ramos** — Senior Project Manager
+   Coordinates multi-phase construction timelines with precision. Expert in stakeholder communication and budget management.
+
+5. **Diego Hernández** — Chief Site Supervisor
+   Hands-on leadership at every job site. Manages crews, enforces safety protocols, and ensures construction quality from foundation to finish.
+
+6. **José Miguel Torres** — Equipment & Fleet Manager
+   Keeps the heavy equipment fleet in peak condition. Manages maintenance schedules, logistics, and rental operations across all active sites.
+
+---
+
+## Areas of Operation
+
+- **Primary**: El Salvador (Santa Tecla, San Salvador, Punta Mango, and more)
+- **International**: United States (San Diego, California)
+
+---
+
+## Social Media & Contact
+
+- **Email**: services@gcs.sv
+- **LinkedIn**: https://www.linkedin.com/company/gcs-el-salvador/
+- **Instagram**: https://www.instagram.com/gcs.sv/
+- **Facebook**: https://www.facebook.com/gcs.sv/
+
+---
+
+## Technical Notes
+
+- The website is bilingual (English/Spanish) with client-side language switching
+- Available at https://gcs.sv
+- Contact form available at the bottom of the homepage

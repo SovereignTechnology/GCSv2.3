@@ -155,20 +155,20 @@ test.describe('Content Completeness', () => {
     expect(count).toBe(6);
   });
 
-  test('6 team members are displayed', async ({ page }) => {
+  test('2 team members are displayed', async ({ page }) => {
     await page.goto('/');
 
     const teamCards = page.locator('.team-card');
     const count = await teamCards.count();
-    expect(count).toBe(6);
+    expect(count).toBe(2);
   });
 
-  test('4 machinery cards are displayed', async ({ page }) => {
+  test('8 machinery cards are displayed', async ({ page }) => {
     await page.goto('/');
 
     const machineryCards = page.locator('.machinery-card');
     const count = await machineryCards.count();
-    expect(count).toBe(4);
+    expect(count).toBe(8);
   });
 });
 
@@ -304,7 +304,13 @@ test.describe('Interactions', () => {
     await page.goto('/');
 
     await page.locator('.the-nav__menu a[href="#team"]').click();
-    await page.waitForTimeout(800);
+    // Wait for the smooth-scroll animation to settle (scroll distance grows with page content).
+    await page.waitForFunction(() => {
+      const y = Math.round(window.scrollY);
+      const settled = window.__scrollSettleY === y;
+      window.__scrollSettleY = y;
+      return settled;
+    }, null, { timeout: 5000, polling: 150 });
 
     const teamSection = page.locator('#team');
     const box = await teamSection.boundingBox();

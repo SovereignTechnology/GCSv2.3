@@ -48,7 +48,11 @@
       { "title": "Excavators", "spec": "CAT 320 Series - 20-ton operating weight class" },
       { "title": "Concrete Mixers", "spec": "8-12 cubic meter drum capacity" },
       { "title": "Cranes", "spec": "Tower and mobile, 5 to 80 tons" },
-      { "title": "Dump Trucks", "spec": "25-40 ton payload capacity" }
+      { "title": "Dump Trucks", "spec": "25-40 ton payload capacity" },
+      { "title": "Mazda BT-50 - Silver (2024)", "spec": "4x4 utility pickup, silver - GCS field fleet" },
+      { "title": "Mazda BT-50 - Grey (2024)", "spec": "4x4 utility pickup, grey - GCS field fleet" },
+      { "title": "Mitsubishi L200 - Black (2026)", "spec": "4x4 double-cab pickup, black - GCS field fleet" },
+      { "title": "Toyota Hilux Single Cab - White (2022)", "spec": "Single-cab work pickup, white - GCS field fleet" }
     ]
   },
   {
@@ -58,12 +62,8 @@
       { "tag": "h2", "text": "Meet the Team" }
     ],
     "members": [
-      { "name": "Carlos Mendoza", "role": "Founder & CEO", "bio": "Over 20 years of experience leading construction projects across Central America." },
-      { "name": "Maria Elena Gutierrez", "role": "VP of Operations", "bio": "Civil engineering expert with deep expertise in project execution." },
-      { "name": "Roberto Castillo", "role": "Lead Architect", "bio": "BIM specialist bridging design vision with structural reality." },
-      { "name": "Ana Lucia Ramos", "role": "Senior Project Manager", "bio": "Coordinates multi-phase construction timelines with precision." },
-      { "name": "Diego Hernandez", "role": "Chief Site Supervisor", "bio": "Hands-on leadership at every job site." },
-      { "name": "Jose Miguel Torres", "role": "Equipment & Fleet Manager", "bio": "Keeps our heavy equipment fleet in peak condition." }
+      { "name": "Jose Max Hernandez Sandoval", "role": "CEO - Engineer - Director de Obra", "bio": "GCS's CEO and a licensed engineer holding the COAMSS/OPAMSS Director de Obra (CS/3) accreditation - reg. HJ046931663, valid 2026-2029. Authorized to take legal responsibility for construction of any kind." },
+      { "name": "Eduardo Margerit", "role": "COO", "bio": "Chief Operating Officer of GCS, leading day-to-day operations, projects, resources, and teams." }
     ]
   },
   {

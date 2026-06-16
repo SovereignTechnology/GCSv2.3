@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf dist && mkdir -p dist && cp index.html styles.css script.js robots.txt sitemap.xml llms.txt llms-full.txt dist/ && cp -r assets content GCS_logo_kit api dist/",
+    "build": "rm -rf dist && mkdir -p dist && cp index.html styles.css script.js robots.txt sitemap.xml llms.txt llms-full.txt dist/ && cp -r assets content GCS_logo_kit api es dist/",
+    "build:es": "node scripts/generate-es.mjs",
     "deploy": "npm run build && wrangler deploy",
     "preview": "npm run build && wrangler dev",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,6 +18,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.59.1",
+    "node-html-parser": "^7.1.0",
     "playwright": "^1.59.1",
     "wrangler": "^4.14.4"
   }

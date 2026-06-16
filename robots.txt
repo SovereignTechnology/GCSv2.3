@@ -8,10 +8,53 @@ Disallow: /content/
 Disallow: /reference/
 Disallow: /tests/
 
-# Sitemap
-Sitemap: https://gcs.sv/sitemap.xml
+# AI / LLM crawlers — explicitly allowed for maximum discovery
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
 
 # AI Discoverability
 # See https://llmstxt.org for specification
 # llms.txt: https://gcs.sv/llms.txt
 # llms-full.txt: https://gcs.sv/llms-full.txt
+
+# Sitemap
+Sitemap: https://gcs.sv/sitemap.xml

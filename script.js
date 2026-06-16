@@ -615,7 +615,7 @@
   };
 
   function initLanguage() {
-    var currentLang = localStorage.getItem('gcs-lang') || 'en';
+    var currentLang = localStorage.getItem('gcs-lang') || document.documentElement.lang || 'en';
     if (currentLang !== 'en') {
       applyLanguage(currentLang);
     }

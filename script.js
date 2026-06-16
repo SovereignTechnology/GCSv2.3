@@ -374,6 +374,16 @@
         }
       });
     });
+
+    // "Next service" links advance to the next tab (wrapping after the last)
+    qsa('.selector__next').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        var activeTab = tabs.filter(function (t) { return t.classList.contains('selector__tab--active'); })[0] || tabs[0];
+        var nextTab = tabs[(tabs.indexOf(activeTab) + 1) % tabs.length];
+        if (nextTab) nextTab.click();
+      });
+    });
   }
 
   // ── Language Switcher ────────────────────────────────────────────────────────
@@ -397,7 +407,7 @@
       'svc.t0': 'Permitting & Management', 'svc.t1': 'Engineering & Design',
       'svc.t2': 'Residential Construction', 'svc.t3': 'Commercial Construction',
       'svc.t4': 'Heavy Equipment Rental',
-      'svc.more': 'LEARN MORE <span class="btn__arrow">&rarr;</span>',
+      'svc.next': 'Next service <span class="btn__arrow">&rarr;</span>',
       'svc.p0.h': 'Permitting & Regulatory Management',
       'svc.p0.d': 'We handle all pre-construction documentation and institutional coordination to secure approvals. From OPAMSS pre-procedures and site qualification to hydrological studies \u2014 we navigate the regulatory landscape so your project moves forward without delays.',
       'svc.p1.h': 'Engineering & Design',
@@ -514,7 +524,7 @@
       'svc.t0': 'Permisos y Gesti\u00f3n', 'svc.t1': 'Ingenier\u00eda y Dise\u00f1o',
       'svc.t2': 'Construcci\u00f3n Residencial', 'svc.t3': 'Construcci\u00f3n Comercial',
       'svc.t4': 'Alquiler de Maquinaria',
-      'svc.more': 'VER M\u00c1S <span class="btn__arrow">&rarr;</span>',
+      'svc.next': 'Siguiente servicio <span class="btn__arrow">&rarr;</span>',
       'svc.p0.h': 'Permisos y Gesti\u00f3n Regulatoria',
       'svc.p0.d': 'Gestionamos toda la documentaci\u00f3n previa a la construcci\u00f3n y la coordinaci\u00f3n institucional para obtener aprobaciones. Desde pre-tr\u00e1mites de OPAMSS y calificaci\u00f3n de sitios hasta estudios hidrol\u00f3gicos \u2014 navegamos el panorama regulatorio para que su proyecto avance sin demoras.',
       'svc.p1.h': 'Ingenier\u00eda y Dise\u00f1o',

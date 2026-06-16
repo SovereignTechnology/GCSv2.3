@@ -4,3 +4,5 @@ playwright-report/
 test-results/
 .cache/
 tests/screenshots/
+.wrangler/
+ADDTOREPO/

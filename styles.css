@@ -2065,3 +2065,233 @@ body:not(.no-transition) *::before,
 body:not(.no-transition) *::after {
   transition: background-color 0.3s ease, color 0.2s ease, border-color 0.3s ease;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   Fleet photos, team headshots, certification (added)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Photo images dropped into the machinery & team card placeholders */
+.machinery-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.team-card__avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ── Featured team card (CEO / Director de Obra) ── */
+.team-card--featured {
+  grid-column: span 2;
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  text-align: left;
+  padding: 32px;
+  scroll-margin-top: 120px;
+}
+
+.team-card__avatar--lg {
+  width: 132px;
+  height: 132px;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.team-card__info {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.team-card--featured .team-card__name { font-size: 22px; }
+.team-card--featured .team-card__bio { margin-bottom: 18px; }
+
+/* ── Credential block ── */
+.team-cred {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 16px;
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--color-gold);
+  border-radius: var(--border-radius);
+  background: rgba(250, 204, 21, 0.06);
+}
+
+.team-cred__main { flex: 1 1 240px; min-width: 0; }
+
+.team-cred__badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.team-cred__code {
+  flex: 0 0 auto;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  color: #0b3a6f;
+  background: var(--color-gold);
+  padding: 8px 12px;
+  border-radius: 8px;
+  letter-spacing: 0.5px;
+}
+
+.team-cred__authority {
+  font-size: 13px;
+  font-weight: var(--fw-semibold);
+  color: var(--text-heading);
+  line-height: 1.4;
+}
+
+.team-cred__meta {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.team-cred__meta strong {
+  color: var(--text-heading);
+  font-weight: var(--fw-semibold);
+}
+
+/* ── Carnet thumbnail (opens full accreditation card) ── */
+.team-card__carnet {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: transform var(--transition-fast);
+}
+
+.team-card__carnet:hover { transform: translateY(-2px); }
+
+.team-card__carnet img {
+  width: 104px;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.team-card__carnet-label {
+  font-size: 12px;
+  font-weight: var(--fw-medium);
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* ── Hero certification badge ── */
+.hero-cert-badge {
+  position: absolute;
+  right: 60px;
+  bottom: 88px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 320px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: #fff;
+  background: rgba(17, 24, 39, 0.55);
+  border: 1px solid rgba(250, 204, 21, 0.5);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.hero-cert-badge:hover,
+.hero-cert-badge:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--color-gold);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.hero-cert-badge__seal {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: #111827;
+  background: var(--color-gold);
+}
+
+.hero-cert-badge__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.hero-cert-badge__text strong {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.3px;
+}
+
+.hero-cert-badge__text small {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.3px;
+}
+
+/* ── Dark-mode variants ── */
+[data-theme="dark"] .team-cred {
+  background: rgba(250, 204, 21, 0.08);
+  border-color: var(--border-subtle);
+  border-left-color: var(--color-gold);
+}
+
+[data-theme="dark"] .team-cred__authority { color: var(--text-heading); }
+[data-theme="dark"] .team-cred__meta { color: var(--text-secondary); }
+[data-theme="dark"] .team-card__carnet img { border-color: var(--border-subtle); }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .hero-cert-badge { right: 40px; bottom: 24px; }
+}
+
+@media (max-width: 576px) {
+  .team-card--featured {
+    grid-column: 1 / -1;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 28px 18px;
+  }
+  .team-card__info { width: 100%; }
+  .team-cred {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+  }
+  .team-card__carnet { align-self: center; }
+  .hero-cert-badge {
+    right: 16px;
+    bottom: 18px;
+    max-width: 240px;
+    padding: 10px 14px;
+    gap: 10px;
+  }
+  .hero-cert-badge__text small { font-size: 10px; }
+}

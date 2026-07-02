@@ -8,6 +8,7 @@
 // data-i18n-aria        -> aria-label
 // data-i18n-alt         -> alt
 // data-i18n-placeholder -> placeholder
+// data-i18n-title       -> title
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
@@ -138,20 +139,34 @@ for (const el of root.querySelectorAll('[data-i18n-placeholder]')) {
   applied++;
 }
 
+for (const el of root.querySelectorAll('[data-i18n-title]')) {
+  const key = el.getAttribute('data-i18n-title');
+  const val = getKeyValue(key);
+  if (val === undefined) continue;
+  el.setAttribute('title', val);
+  applied++;
+}
+
 // ── e. <html> lang="es" ──────────────────────────────────────────────────────
 const htmlEl = root.querySelector('html');
 if (htmlEl) htmlEl.setAttribute('lang', 'es');
 
 // ── f. Head updates ──────────────────────────────────────────────────────────
+const ES_TITLE = 'Grupo Integral De Construcciones y Servicios';
+
 const titleEl = root.querySelector('head title');
 if (titleEl) {
-  titleEl.set_content('GCS El Salvador — Construcción, Ingeniería y Permisos');
+  titleEl.set_content(ES_TITLE);
 }
 
 const ES_DESCRIPTION =
   'GCS (Grupo Integral De Construcciones y Servicios) — Construcción, ingeniería, ' +
   'permisos y alquiler de maquinaria pesada en El Salvador. Proyectos residenciales ' +
   'y comerciales con más de 10 años de experiencia.';
+
+const ES_OG_DESCRIPTION =
+  'Permisos y Gestión · Ingeniería y Diseño · Construcción Residencial · ' +
+  'Construcción Comercial · Alquiler de Maquinaria Pesada';
 
 const descEl = root.querySelector('meta[name="description"]');
 if (descEl) descEl.setAttribute('content', ES_DESCRIPTION);
@@ -162,6 +177,12 @@ if (canonicalEl) canonicalEl.setAttribute('href', 'https://gcs.sv/es/');
 const ogUrlEl = root.querySelector('meta[property="og:url"]');
 if (ogUrlEl) ogUrlEl.setAttribute('content', 'https://gcs.sv/es/');
 
+const ogDescEl = root.querySelector('meta[property="og:description"]');
+if (ogDescEl) ogDescEl.setAttribute('content', ES_OG_DESCRIPTION);
+
+const twDescEl = root.querySelector('meta[name="twitter:description"]');
+if (twDescEl) twDescEl.setAttribute('content', ES_OG_DESCRIPTION);
+
 const ogLocaleEl = root.querySelector('meta[property="og:locale"]');
 if (ogLocaleEl) ogLocaleEl.setAttribute('content', 'es_SV');
 
@@ -169,6 +190,41 @@ const ogLocaleAltEl = root.querySelector('meta[property="og:locale:alternate"]')
 if (ogLocaleAltEl) ogLocaleAltEl.setAttribute('content', 'en_US');
 
 // hreflang alternates are kept exactly as-is (en, es, x-default).
+
+// The language toggle must point back to the English page.
+const langToggleEl = root.querySelector('#lang-toggle');
+if (langToggleEl) {
+  langToggleEl.setAttribute('href', '/');
+  langToggleEl.setAttribute('hreflang', 'en');
+  langToggleEl.setAttribute('lang', 'en');
+}
+
+// ── f2. Localize the JSON-LD WebPage node ────────────────────────────────────
+for (const scriptEl of root.querySelectorAll('script[type="application/ld+json"]')) {
+  let data;
+  try {
+    data = JSON.parse(scriptEl.textContent);
+  } catch {
+    console.warn('[generate-es] Skipping unparseable JSON-LD block');
+    continue;
+  }
+  const nodes = Array.isArray(data) ? data : [data];
+  let touched = false;
+  for (const node of nodes) {
+    if (node && node['@type'] === 'WebPage') {
+      node['@id'] = 'https://gcs.sv/es/#webpage';
+      node.url = 'https://gcs.sv/es/';
+      node.name = ES_TITLE;
+      node.description = ES_DESCRIPTION;
+      node.inLanguage = 'es';
+      touched = true;
+    }
+  }
+  if (touched) {
+    // <-escape to keep the payload safe inside a <script> element.
+    scriptEl.set_content(JSON.stringify(data, null, 2).replace(/</g, '\\u003c'));
+  }
+}
 
 // ── g. Rewrite root-relative asset paths so they resolve from /es/ ────────────
 // For every src= and href= value that does NOT start with http, #, /, or mailto:,
@@ -190,6 +246,7 @@ function rewriteRefs(attr) {
 }
 rewriteRefs('src');
 rewriteRefs('href');
+rewriteRefs('poster');
 
 // ── h. Write out, preserving the DOCTYPE ─────────────────────────────────────
 mkdirSync(OUT_DIR, { recursive: true });
@@ -199,7 +256,10 @@ mkdirSync(OUT_DIR, { recursive: true });
 const doctypeMatch = html.match(/^\s*<!doctype[^>]*>/i);
 const doctype = doctypeMatch ? doctypeMatch[0].trim() : '<!DOCTYPE html>';
 
-const output = doctype + '\n' + root.toString();
+// node-html-parser can emit the parsed doctype itself — strip it so the
+// re-prepended one is the only doctype in the output (was doubling before).
+const body = root.toString().replace(/^\s*<!doctype[^>]*>\s*/i, '');
+const output = doctype + '\n' + body;
 writeFileSync(OUT_PATH, output, 'utf8');
 
 console.log(`[generate-es] Wrote ${OUT_PATH}`);

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GCS El Salvador — Construction, Engineering & Permitting Services</title>
+  <title>Grupo Integral De Construcciones y Servicios</title>
   <meta name="description" content="GCS (Grupo Integral De Construcciones y Servicios) — Construction, engineering, permitting, and heavy equipment rental in El Salvador. Residential & commercial projects with 10+ years experience.">
   <link rel="canonical" href="https://gcs.sv/">
   <link rel="alternate" hreflang="en" href="https://gcs.sv/">
@@ -208,6 +208,21 @@
       }
     })();
   </script>
+  <script>
+    (function() {
+      try {
+        var pref = localStorage.getItem('gcs-lang');
+        if (!pref) return;
+        var path = window.location.pathname;
+        var suffix = window.location.search + window.location.hash;
+        if (pref === 'es' && (path === '/' || path === '/index.html')) {
+          window.location.replace('/es/' + suffix);
+        } else if (pref === 'en' && (path === '/es/' || path === '/es/index.html')) {
+          window.location.replace('/' + suffix);
+        }
+      } catch (e) { /* localStorage unavailable */ }
+    })();
+  </script>
 </head>
 <body class="no-transition">
   <!-- Skip Nav -->
@@ -220,8 +235,8 @@
     </div>
     <div class="top-bar__links">
       <a href="#contact" data-i18n="tb.contact">CONTACT</a>
-      <a href="#" id="lang-toggle" data-i18n="tb.lang">ESPAÑOL</a>
-      <button class="top-bar__theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+      <a href="/es/" id="lang-toggle" hreflang="es" lang="es" data-i18n="tb.lang">ESPAÑOL</a>
+      <button class="top-bar__theme-toggle" id="theme-toggle" data-i18n-aria="tb.theme" aria-label="Toggle dark mode">
         <svg class="theme-icon theme-icon--light" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         <svg class="theme-icon theme-icon--dark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
@@ -269,7 +284,7 @@
         <div class="hero-slider__track">
           <div class="hero-slide hero-slide--active" data-index="0">
             <div class="hero-slide__bg">
-              <video class="hero-slide__video" muted loop playsinline autoplay preload="none">
+              <video class="hero-slide__video" muted loop playsinline autoplay preload="none" poster="assets/images/hero-poster.jpg" aria-hidden="true">
                 <source src="assets/videos/hero-video.mp4" type="video/mp4">
               </video>
             </div>
@@ -278,7 +293,7 @@
               <h1 class="hero-slide__title" data-i18n-html="hero.title">Experts in Construction<br><em>and problem solving</em></h1>
               <a href="#services" class="btn btn--gold" data-i18n-html="hero.cta">Explore Our Services <span class="btn__arrow">&rarr;</span></a>
             </div>
-            <a href="#team-max" class="hero-cert-badge" data-i18n-aria="hero.cert.aria" aria-label="Director de Obra — view our certified engineer">
+            <a href="#team-max" class="hero-cert-badge" data-i18n-aria="hero.cert.aria" aria-label="Director de Obra — view our accredited engineer">
               <span class="hero-cert-badge__seal" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.39 1.79 2.98-.2 1 2.83 2.45 1.71-1.01 2.81 1.01 2.81-2.45 1.71-1 2.83-2.98-.2L12 22l-2.39-1.79-2.98.2-1-2.83-2.45-1.71 1.01-2.81-1.01-2.81 2.45-1.71 1-2.83 2.98.2z"/><polyline points="8.6 12 11 14.4 15.4 9.6"/></svg>
               </span>
@@ -300,16 +315,16 @@
           <h2 class="the-header__title" data-i18n-html="svc.title">Our <em>Services</em></h2>
         </div>
         <div class="selector">
-          <div class="selector__tabs" role="tablist">
-            <button class="selector__tab selector__tab--active" role="tab" aria-selected="true" data-tab="0" data-i18n="svc.t0">Permitting & Management</button>
-            <button class="selector__tab" role="tab" aria-selected="false" data-tab="1" data-i18n="svc.t1">Engineering & Design</button>
-            <button class="selector__tab" role="tab" aria-selected="false" data-tab="2" data-i18n="svc.t2">Residential Construction</button>
-            <button class="selector__tab" role="tab" aria-selected="false" data-tab="3" data-i18n="svc.t3">Commercial Construction</button>
-            <button class="selector__tab" role="tab" aria-selected="false" data-tab="4" data-i18n="svc.t4">Heavy Equipment Rental</button>
+          <div class="selector__tabs" role="tablist" data-i18n-aria="svc.label" aria-label="Our Services">
+            <button class="selector__tab selector__tab--active" id="svc-tab-0" role="tab" aria-selected="true" aria-controls="svc-panel-0" tabindex="0" data-tab="0" data-i18n="svc.t0">Permitting & Management</button>
+            <button class="selector__tab" id="svc-tab-1" role="tab" aria-selected="false" aria-controls="svc-panel-1" tabindex="-1" data-tab="1" data-i18n="svc.t1">Engineering & Design</button>
+            <button class="selector__tab" id="svc-tab-2" role="tab" aria-selected="false" aria-controls="svc-panel-2" tabindex="-1" data-tab="2" data-i18n="svc.t2">Residential Construction</button>
+            <button class="selector__tab" id="svc-tab-3" role="tab" aria-selected="false" aria-controls="svc-panel-3" tabindex="-1" data-tab="3" data-i18n="svc.t3">Commercial Construction</button>
+            <button class="selector__tab" id="svc-tab-4" role="tab" aria-selected="false" aria-controls="svc-panel-4" tabindex="-1" data-tab="4" data-i18n="svc.t4">Heavy Equipment Rental</button>
           </div>
           <div class="selector__panels">
             <!-- Permitting -->
-            <div class="selector__panel selector__panel--active" role="tabpanel" data-panel="0">
+            <div class="selector__panel selector__panel--active" id="svc-panel-0" role="tabpanel" aria-labelledby="svc-tab-0" tabindex="0" data-panel="0">
               <div class="selector__panel-content">
                 <h3 data-i18n="svc.p0.h">Permitting & Regulatory Management</h3>
                 <p data-i18n="svc.p0.d">We handle all pre-construction documentation and institutional coordination to secure approvals. From OPAMSS pre-procedures and site qualification to hydrological studies — we navigate the regulatory landscape so your project moves forward without delays.</p>
@@ -320,7 +335,7 @@
               </div>
             </div>
             <!-- Engineering & Design -->
-            <div class="selector__panel" role="tabpanel" data-panel="1">
+            <div class="selector__panel" id="svc-panel-1" role="tabpanel" aria-labelledby="svc-tab-1" tabindex="0" data-panel="1">
               <div class="selector__panel-content">
                 <h3 data-i18n="svc.p1.h">Engineering & Design</h3>
                 <p data-i18n="svc.p1.d">From initial concepts to final blueprints, our engineering team transforms your vision into precise, buildable plans. We specialize in conceptual design, land surveys, topographical studies, structural plans, and BIM-based modeling for complete construction documentation.</p>
@@ -331,7 +346,7 @@
               </div>
             </div>
             <!-- Residential Construction -->
-            <div class="selector__panel" role="tabpanel" data-panel="2">
+            <div class="selector__panel" id="svc-panel-2" role="tabpanel" aria-labelledby="svc-tab-2" tabindex="0" data-panel="2">
               <div class="selector__panel-content">
                 <h3 data-i18n="svc.p2.h">Residential Construction</h3>
                 <p data-i18n="svc.p2.d">We build homes and residential developments that stand the test of time. From custom family houses to multi-unit apartment complexes, our residential projects combine quality craftsmanship, modern design, and efficient project management.</p>
@@ -342,7 +357,7 @@
               </div>
             </div>
             <!-- Commercial Construction -->
-            <div class="selector__panel" role="tabpanel" data-panel="3">
+            <div class="selector__panel" id="svc-panel-3" role="tabpanel" aria-labelledby="svc-tab-3" tabindex="0" data-panel="3">
               <div class="selector__panel-content">
                 <h3 data-i18n="svc.p3.h">Commercial Construction</h3>
                 <p data-i18n="svc.p3.d">Our commercial construction division delivers restaurants, retail spaces, office buildings, and wellness complexes. We manage every phase from foundation to finish, ensuring projects meet commercial-grade standards, timelines, and budgets.</p>
@@ -353,7 +368,7 @@
               </div>
             </div>
             <!-- Heavy Equipment Rental -->
-            <div class="selector__panel" role="tabpanel" data-panel="4">
+            <div class="selector__panel" id="svc-panel-4" role="tabpanel" aria-labelledby="svc-tab-4" tabindex="0" data-panel="4">
               <div class="selector__panel-content">
                 <h3 data-i18n="svc.p4.h">Heavy Equipment Rental</h3>
                 <p data-i18n="svc.p4.d">Access our fleet of professional-grade construction equipment. From excavators and cranes to concrete mixers and dump trucks — we provide well-maintained heavy machinery with flexible rental terms to keep your project on schedule.</p>
@@ -383,9 +398,9 @@
         <div class="project-grid">
           <!-- Project 1 -->
           <article class="project-card">
-            <a href="#">
+            <a>
               <div class="project-card__image">
-                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" width="400" height="250" role="img">
+                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" width="400" height="250" aria-hidden="true">
                   <rect width="400" height="250" rx="8" fill="#1f2937"/>
                   <rect x="100" y="30" width="200" height="150" rx="4" fill="none" stroke="#FACC15" stroke-width="1.5"/>
                   <rect x="100" y="30" width="200" height="30" fill="#FACC15" opacity="0.1"/>
@@ -395,7 +410,7 @@
                   <rect x="115" y="130" width="40" height="40" fill="#FACC15" opacity="0.1" rx="2"/>
                   <rect x="180" y="130" width="40" height="40" fill="#FACC15" opacity="0.1" rx="2"/>
                   <rect x="245" y="130" width="40" height="40" fill="#FACC15" opacity="0.1" rx="2"/>
-                  <text x="200" y="220" text-anchor="middle" fill="#6B7280" font-family="Poppins, sans-serif" font-size="11">Photo Coming Soon</text>
+                  <text x="200" y="220" text-anchor="middle" fill="#6B7280" font-family="Poppins, sans-serif" font-size="11" data-i18n="misc.photo_soon">Photo Coming Soon</text>
                 </svg>
               </div>
               <div class="project-card__content">
@@ -407,15 +422,15 @@
           </article>
           <!-- Project 2 -->
           <article class="project-card">
-            <a href="#">
+            <a>
               <div class="project-card__image">
-                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" width="400" height="250" role="img">
+                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" width="400" height="250" aria-hidden="true">
                   <rect width="400" height="250" rx="8" fill="#1f2937"/>
                   <rect x="100" y="40" width="200" height="140" rx="4" fill="none" stroke="#FACC15" stroke-width="1.5"/>
                   <rect x="120" y="60" width="40" height="30" fill="#FACC15" opacity="0.12" rx="2"/>
                   <rect x="240" y="60" width="40" height="30" fill="#FACC15" opacity="0.12" rx="2"/>
                   <rect x="170" y="130" width="60" height="50" fill="none" stroke="#FACC15" stroke-width="1.5" rx="2"/>
-                  <text x="200" y="220" text-anchor="middle" fill="#6B7280" font-family="Poppins, sans-serif" font-size="11">Photo Coming Soon</text>
+                  <text x="200" y="220" text-anchor="middle" fill="#6B7280" font-family="Poppins, sans-serif" font-size="11" data-i18n="misc.photo_soon">Photo Coming Soon</text>
                 </svg>
               </div>
               <div class="project-card__content">
@@ -427,14 +442,14 @@
           </article>
           <!-- Project 3 -->
           <article class="project-card">
-            <a href="#">
+            <a>
               <div class="project-card__image">
-                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" width="400" height="250" role="img">
+                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" width="400" height="250" aria-hidden="true">
                   <rect width="400" height="250" rx="8" fill="#1f2937"/>
                   <circle cx="200" cy="100" r="50" fill="none" stroke="#FACC15" stroke-width="1.5"/>
                   <path d="M180,100 Q200,80 220,100 Q200,120 180,100" fill="#FACC15" opacity="0.15"/>
                   <rect x="140" y="160" width="120" height="8" rx="4" fill="#374151"/>
-                  <text x="200" y="220" text-anchor="middle" fill="#6B7280" font-family="Poppins, sans-serif" font-size="11">Photo Coming Soon</text>
+                  <text x="200" y="220" text-anchor="middle" fill="#6B7280" font-family="Poppins, sans-serif" font-size="11" data-i18n="misc.photo_soon">Photo Coming Soon</text>
                 </svg>
               </div>
               <div class="project-card__content">
@@ -446,16 +461,16 @@
           </article>
           <!-- Project 4 -->
           <article class="project-card">
-            <a href="#">
+            <a>
               <div class="project-card__image">
-                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" width="400" height="250" role="img">
+                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" width="400" height="250" aria-hidden="true">
                   <rect width="400" height="250" rx="8" fill="#1f2937"/>
                   <rect x="100" y="50" width="200" height="130" rx="8" fill="none" stroke="#FACC15" stroke-width="1.5"/>
                   <rect x="100" y="50" width="200" height="30" fill="#FACC15" opacity="0.1" rx="8"/>
                   <rect x="120" y="100" width="60" height="40" fill="#FACC15" opacity="0.08" rx="2"/>
                   <rect x="220" y="100" width="60" height="40" fill="#FACC15" opacity="0.08" rx="2"/>
                   <rect x="165" y="150" width="70" height="30" fill="none" stroke="#FACC15" stroke-width="1" rx="2"/>
-                  <text x="200" y="220" text-anchor="middle" fill="#6B7280" font-family="Poppins, sans-serif" font-size="11">Photo Coming Soon</text>
+                  <text x="200" y="220" text-anchor="middle" fill="#6B7280" font-family="Poppins, sans-serif" font-size="11" data-i18n="misc.photo_soon">Photo Coming Soon</text>
                 </svg>
               </div>
               <div class="project-card__content">
@@ -467,14 +482,14 @@
           </article>
           <!-- Project 5 -->
           <article class="project-card">
-            <a href="#">
+            <a>
               <div class="project-card__image">
-                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" width="400" height="250" role="img">
+                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" width="400" height="250" aria-hidden="true">
                   <rect width="400" height="250" rx="8" fill="#1f2937"/>
                   <polygon points="200,50 120,120 280,120" fill="none" stroke="#FACC15" stroke-width="1.5"/>
                   <rect x="140" y="120" width="120" height="70" fill="none" stroke="#FACC15" stroke-width="1.5"/>
                   <rect x="180" y="145" width="40" height="45" fill="none" stroke="#FACC15" stroke-width="1" rx="2"/>
-                  <text x="200" y="220" text-anchor="middle" fill="#6B7280" font-family="Poppins, sans-serif" font-size="11">Photo Coming Soon</text>
+                  <text x="200" y="220" text-anchor="middle" fill="#6B7280" font-family="Poppins, sans-serif" font-size="11" data-i18n="misc.photo_soon">Photo Coming Soon</text>
                 </svg>
               </div>
               <div class="project-card__content">
@@ -486,16 +501,16 @@
           </article>
           <!-- Project 6 -->
           <article class="project-card">
-            <a href="#">
+            <a>
               <div class="project-card__image">
-                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" width="400" height="250" role="img">
+                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" width="400" height="250" aria-hidden="true">
                   <rect width="400" height="250" rx="8" fill="#1f2937"/>
                   <polygon points="160,60 130,110 190,110" fill="none" stroke="#FACC15" stroke-width="1.5"/>
                   <rect x="135" y="110" width="50" height="60" fill="none" stroke="#FACC15" stroke-width="1.5"/>
                   <polygon points="260,60 230,110 290,110" fill="none" stroke="#FACC15" stroke-width="1.5"/>
                   <rect x="235" y="110" width="50" height="60" fill="none" stroke="#FACC15" stroke-width="1.5"/>
                   <line x1="100" y1="175" x2="300" y2="175" stroke="#374151" stroke-width="1"/>
-                  <text x="200" y="220" text-anchor="middle" fill="#6B7280" font-family="Poppins, sans-serif" font-size="11">Photo Coming Soon</text>
+                  <text x="200" y="220" text-anchor="middle" fill="#6B7280" font-family="Poppins, sans-serif" font-size="11" data-i18n="misc.photo_soon">Photo Coming Soon</text>
                 </svg>
               </div>
               <div class="project-card__content">
@@ -520,7 +535,7 @@
           <!-- Excavators -->
           <article class="machinery-card">
             <div class="machinery-card__image">
-              <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" width="400" height="280" role="img" aria-label="Excavator">
+              <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" width="400" height="280" aria-hidden="true">
                 <rect width="400" height="280" rx="8" fill="#111827"/>
                 <rect x="130" y="100" width="160" height="70" rx="6" fill="none" stroke="#FACC15" stroke-width="2"/>
                 <rect x="240" y="65" width="60" height="35" rx="4" fill="none" stroke="#FACC15" stroke-width="2"/>
@@ -529,7 +544,7 @@
                 <line x1="160" y1="50" x2="100" y2="110" stroke="#FACC15" stroke-width="2.5"/>
                 <polyline points="100,110 85,125 115,140 130,125" fill="none" stroke="#FACC15" stroke-width="2"/>
                 <rect x="120" y="170" width="180" height="25" rx="12" fill="none" stroke="#FACC15" stroke-width="1.5" opacity="0.7"/>
-                <text x="200" y="240" text-anchor="middle" fill="#9CA3AF" font-family="Poppins, sans-serif" font-size="12">Photo Coming Soon</text>
+                <text x="200" y="240" text-anchor="middle" fill="#9CA3AF" font-family="Poppins, sans-serif" font-size="12" data-i18n="misc.photo_soon">Photo Coming Soon</text>
               </svg>
             </div>
             <div class="machinery-card__content">
@@ -540,7 +555,7 @@
           <!-- Concrete Mixers -->
           <article class="machinery-card">
             <div class="machinery-card__image">
-              <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" width="400" height="280" role="img" aria-label="Concrete mixer">
+              <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" width="400" height="280" aria-hidden="true">
                 <rect width="400" height="280" rx="8" fill="#111827"/>
                 <!-- Truck body -->
                 <rect x="80" y="140" width="120" height="60" rx="4" fill="none" stroke="#FACC15" stroke-width="2"/>
@@ -553,7 +568,7 @@
                 <circle cx="120" cy="210" r="18" fill="none" stroke="#FACC15" stroke-width="2" opacity="0.7"/>
                 <circle cx="260" cy="210" r="18" fill="none" stroke="#FACC15" stroke-width="2" opacity="0.7"/>
                 <circle cx="310" cy="210" r="18" fill="none" stroke="#FACC15" stroke-width="2" opacity="0.7"/>
-                <text x="200" y="260" text-anchor="middle" fill="#9CA3AF" font-family="Poppins, sans-serif" font-size="12">Photo Coming Soon</text>
+                <text x="200" y="260" text-anchor="middle" fill="#9CA3AF" font-family="Poppins, sans-serif" font-size="12" data-i18n="misc.photo_soon">Photo Coming Soon</text>
               </svg>
             </div>
             <div class="machinery-card__content">
@@ -564,7 +579,7 @@
           <!-- Cranes -->
           <article class="machinery-card">
             <div class="machinery-card__image">
-              <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" width="400" height="280" role="img" aria-label="Crane">
+              <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" width="400" height="280" aria-hidden="true">
                 <rect width="400" height="280" rx="8" fill="#111827"/>
                 <!-- Tower -->
                 <rect x="190" y="40" width="12" height="200" fill="none" stroke="#FACC15" stroke-width="2"/>
@@ -581,7 +596,7 @@
                 <line x1="196" y1="44" x2="100" y2="70" stroke="#FACC15" stroke-width="1" opacity="0.4"/>
                 <!-- Base -->
                 <rect x="160" y="240" width="72" height="10" rx="2" fill="none" stroke="#FACC15" stroke-width="1.5" opacity="0.7"/>
-                <text x="200" y="270" text-anchor="middle" fill="#9CA3AF" font-family="Poppins, sans-serif" font-size="12">Photo Coming Soon</text>
+                <text x="200" y="270" text-anchor="middle" fill="#9CA3AF" font-family="Poppins, sans-serif" font-size="12" data-i18n="misc.photo_soon">Photo Coming Soon</text>
               </svg>
             </div>
             <div class="machinery-card__content">
@@ -592,7 +607,7 @@
           <!-- Dump Trucks -->
           <article class="machinery-card">
             <div class="machinery-card__image">
-              <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" width="400" height="280" role="img" aria-label="Dump truck">
+              <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" width="400" height="280" aria-hidden="true">
                 <rect width="400" height="280" rx="8" fill="#111827"/>
                 <!-- Cab -->
                 <rect x="70" y="120" width="80" height="65" rx="4" fill="none" stroke="#FACC15" stroke-width="2"/>
@@ -607,7 +622,7 @@
                 <circle cx="320" cy="200" r="18" fill="none" stroke="#FACC15" stroke-width="2" opacity="0.7"/>
                 <!-- Ground -->
                 <line x1="50" y1="220" x2="360" y2="220" stroke="#374151" stroke-width="1"/>
-                <text x="200" y="260" text-anchor="middle" fill="#9CA3AF" font-family="Poppins, sans-serif" font-size="12">Photo Coming Soon</text>
+                <text x="200" y="260" text-anchor="middle" fill="#9CA3AF" font-family="Poppins, sans-serif" font-size="12" data-i18n="misc.photo_soon">Photo Coming Soon</text>
               </svg>
             </div>
             <div class="machinery-card__content">
@@ -842,8 +857,6 @@
           <a href="#team" data-i18n="ft.2">Team</a>
           <span class="the-footer__sep">|</span>
           <a href="#contact" data-i18n="ft.3">Contact</a>
-          <span class="the-footer__sep">|</span>
-          <a href="#" data-i18n="ft.4">Privacy Policy</a>
         </nav>
         <div class="the-footer__social">
           <a href="https://www.linkedin.com/company/gcs-el-salvador/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
@@ -868,12 +881,12 @@
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
       <div class="video-modal__iframe-wrap">
-        <iframe id="videoIframe" src="" allow="autoplay; encrypted-media" allowfullscreen title="Video player"></iframe>
+        <iframe id="videoIframe" src="" allow="autoplay; encrypted-media" allowfullscreen data-i18n-title="modal.label" title="Video player"></iframe>
       </div>
     </div>
   </div>
 
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=gcsTurnstileOnload&render=explicit" defer></script>
   <script src="script.js"></script>
 </body>
 </html>

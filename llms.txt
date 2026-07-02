@@ -6,7 +6,7 @@
 
 GCS El Salvador provides end-to-end construction services across Central America and the United States. The company specializes in navigating complex regulatory environments, delivering residential and commercial projects, and providing heavy equipment for large-scale operations.
 
-- Website: https://gcs.sv
+- Website: https://gcs.sv (Spanish: https://gcs.sv/es/)
 - Email: services@gcs.sv
 - Languages: English, Spanish
 - Location: El Salvador
@@ -25,6 +25,11 @@ GCS El Salvador provides end-to-end construction services across Central America
 - Active Projects: 19+
 - Years Experience: 10+
 - Team Members: 50+
+
+## Leadership
+
+- José Max Hernández Sandoval — CEO · Engineer, holder of the COAMSS/OPAMSS "Director de Obra" accreditation (Construcción y Supervisión CS/3, Reg. HJ046931663, valid 2026-2029)
+- Eduardo Margerit — COO
 
 ## Notable Projects
 

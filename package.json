@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf dist && mkdir -p dist && cp index.html styles.css script.js robots.txt sitemap.xml llms.txt llms-full.txt dist/ && cp -r assets content GCS_logo_kit api es dist/",
+    "build": "npm run build:es && rm -rf dist && mkdir -p dist && cp index.html styles.css script.js robots.txt sitemap.xml llms.txt llms-full.txt dist/ && cp -r assets GCS_logo_kit es .well-known dist/",
     "build:es": "node scripts/generate-es.mjs",
     "deploy": "npm run build && wrangler deploy",
     "preview": "npm run build && wrangler dev",

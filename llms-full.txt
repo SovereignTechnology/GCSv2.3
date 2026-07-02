@@ -10,7 +10,7 @@ GCS El Salvador (Grupo Integral De Construcciones y Servicios) is a full-service
 
 - **Full Name**: Grupo Integral De Construcciones y Servicios
 - **Short Name**: GCS / GCS El Salvador
-- **Website**: https://gcs.sv
+- **Website**: https://gcs.sv (Spanish: https://gcs.sv/es/)
 - **Email**: services@gcs.sv
 - **Country**: El Salvador
 - **Languages**: English, Spanish
@@ -75,6 +75,13 @@ GCS provides access to professional-grade construction equipment:
 - Flexible rental terms available
 - All equipment professionally maintained
 
+### Field Fleet (site supervision & logistics)
+
+- Mazda BT-50 (2024, silver) — 4x4 utility pickup
+- Mazda BT-50 (2024, grey) — 4x4 utility pickup
+- Mitsubishi L200 (2026, black) — 4x4 double-cab pickup
+- Toyota Hilux Single Cab (2022, white) — work pickup
+
 ---
 
 ## Project Portfolio
@@ -111,23 +118,15 @@ GCS provides access to professional-grade construction equipment:
 
 ## Leadership Team
 
-1. **Carlos Mendoza** — Founder & CEO
-   Over 20 years of experience leading construction and infrastructure projects across Central America. Visionary leader driving GCS's growth and innovation.
+1. **José Max Hernández Sandoval** — CEO · Engineer — Director de Obra
+   GCS's CEO and a licensed engineer. Max holds the COAMSS/OPAMSS "Director de Obra" accreditation — the highest credential a civil engineer or architect can earn in El Salvador, requiring nine years of government-verified experience. It authorizes him to take legal responsibility for construction of any kind; no project can be built — and no company can legally operate as a construction firm — without a Director de Obra.
+   - Accreditation: Director de Obra — Construcción y Supervisión (CS/3)
+   - Issuing authority: COAMSS / OPAMSS (Oficina de Planificación del Área Metropolitana de San Salvador)
+   - Registration: HJ046931663
+   - Valid: 21 April 2026 – 21 April 2029
 
-2. **María Elena Gutiérrez** — VP of Operations
-   Civil engineering expert with deep expertise in project execution and resource optimization. Ensures every project meets the highest quality standards.
-
-3. **Roberto Castillo** — Lead Architect
-   BIM specialist who bridges design vision with structural reality. Leads architectural planning from concept to construction-ready documentation.
-
-4. **Ana Lucía Ramos** — Senior Project Manager
-   Coordinates multi-phase construction timelines with precision. Expert in stakeholder communication and budget management.
-
-5. **Diego Hernández** — Chief Site Supervisor
-   Hands-on leadership at every job site. Manages crews, enforces safety protocols, and ensures construction quality from foundation to finish.
-
-6. **José Miguel Torres** — Equipment & Fleet Manager
-   Keeps the heavy equipment fleet in peak condition. Manages maintenance schedules, logistics, and rental operations across all active sites.
+2. **Eduardo Margerit** — COO (Chief Operating Officer)
+   Leads day-to-day operations — coordinating projects, resources, and teams to deliver every job on time and to standard.
 
 ---
 
@@ -149,6 +148,5 @@ GCS provides access to professional-grade construction equipment:
 
 ## Technical Notes
 
-- The website is bilingual (English/Spanish) with client-side language switching
-- Available at https://gcs.sv
+- The website is bilingual: English at https://gcs.sv/ and Spanish at https://gcs.sv/es/
 - Contact form available at the bottom of the homepage

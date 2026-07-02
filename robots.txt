@@ -3,10 +3,6 @@
 
 User-agent: *
 Allow: /
-Disallow: /api/
-Disallow: /content/
-Disallow: /reference/
-Disallow: /tests/
 
 # AI / LLM crawlers — explicitly allowed for maximum discovery
 User-agent: GPTBot

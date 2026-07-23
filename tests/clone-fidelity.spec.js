@@ -147,20 +147,29 @@ test.describe('Content Completeness', () => {
     }
   });
 
-  test('6 project cards are displayed', async ({ page }) => {
+  test('project showcase shows one card and 11 project dots', async ({ page }) => {
     await page.goto('/');
 
     const projectCards = page.locator('.project-card');
     const count = await projectCards.count();
-    expect(count).toBe(6);
+    expect(count).toBe(1);
+
+    const dots = page.locator('.project-showcase__dot');
+    expect(await dots.count()).toBe(11);
+
+    // Next control advances to a different project
+    const title = page.locator('[data-showcase-title]');
+    const firstTitle = await title.textContent();
+    await page.locator('[data-showcase-next]').click();
+    await expect(title).not.toHaveText(firstTitle || '');
   });
 
-  test('2 team members are displayed', async ({ page }) => {
+  test('3 team members are displayed', async ({ page }) => {
     await page.goto('/');
 
     const teamCards = page.locator('.team-card');
     const count = await teamCards.count();
-    expect(count).toBe(2);
+    expect(count).toBe(3);
   });
 
   test('8 machinery cards are displayed', async ({ page }) => {
@@ -273,7 +282,7 @@ test.describe('Interactions', () => {
 
     const cards = page.locator('.project-card');
     const count = await cards.count();
-    expect(count).toBeGreaterThanOrEqual(5);
+    expect(count).toBe(1);
 
     await expect(cards.first()).toBeVisible();
   });

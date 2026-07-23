@@ -104,29 +104,52 @@ GCS provides access to professional-grade construction equipment:
    - Location: Punta Mango, El Salvador
    - Type: Residential
 
+5. **San Diego House**
+   - Location: San Diego, USA
+   - Type: Residential
+
+6. **Itzel**
+   - Location: Lake Ilopango, El Salvador
+   - Type: Residential
+
 ### Commercial Projects
 
-5. **Sound Health Wellness Complex**
+7. **Sound Health Wellness Complex**
    - Location: San Diego, USA
    - Type: Commercial / Wellness
 
-6. **Luxury Cabins**
-   - Location: La Posada de los Pájaros
+8. **Cabañas Planes de Renderos**
+   - Location: Planes de Renderos, El Salvador
    - Type: Commercial / Hospitality
+
+9. **BAC Santa Elena T3**
+   - Location: Santa Elena, El Salvador
+   - Type: Commercial
+
+10. **Coscafe**
+   - Location: El Salvador
+   - Type: Commercial
+
+11. **Happiness Bay**
+   - Location: El Salvador
+   - Type: Commercial
 
 ---
 
 ## Leadership Team
 
 1. **José Max Hernández Sandoval** — CEO · Engineer — Director de Obra
-   GCS's CEO and a licensed engineer. Max holds the COAMSS/OPAMSS "Director de Obra" accreditation — the highest credential a civil engineer or architect can earn in El Salvador, requiring nine years of government-verified experience. It authorizes him to take legal responsibility for construction of any kind; no project can be built — and no company can legally operate as a construction firm — without a Director de Obra.
+   GCS's CEO and a licensed engineer. Max holds the COAMSS/OPAMSS "Director de Obra" accreditation — the highest credential a civil engineer or architect can earn in El Salvador, requiring nine years of government-verified experience. It authorizes him to take legal responsibility for construction of any kind. His track record spans El Chaparral, the Airport expansion, Bitcoin mining facilities in Berlín, and apartment towers; today no project can be built — and no company can legally operate as a construction firm — without a Director de Obra.
    - Accreditation: Director de Obra — Construcción y Supervisión (CS/3)
    - Issuing authority: COAMSS / OPAMSS (Oficina de Planificación del Área Metropolitana de San Salvador)
    - Registration: HJ046931663
    - Valid: 21 April 2026 – 21 April 2029
 
-2. **Eduardo Margerit** — COO (Chief Operating Officer)
+2. **Eduardo M** — COO (Chief Operating Officer)
    Leads day-to-day operations — coordinating projects, resources, and teams to deliver every job on time and to standard.
+
+3. **Ricardo Cummings** — Director of Architecture
+   Leads architectural design across the company's residential and commercial portfolio.
 
 ---
 

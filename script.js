@@ -15,6 +15,7 @@
     initTheme();
     initNav();
     initHeroSlider();
+    initProjectShowcase();
     initScrollReveal();
     initCounters();
     initVideoModals();
@@ -209,6 +210,278 @@
     if (prevBtn) prevBtn.addEventListener('click', function () { prev(); startAutoplay(); });
 
     startAutoplay();
+  }
+
+  // ── Project Showcase ─────────────────────────────────────────────────────────
+  // One large project card at a time: each project visit shows up to 3 random
+  // photos/videos from its pool, then advances to the next project. Projects
+  // with an empty pool get the "photo coming soon" placeholder for one beat.
+  var PROJECT_SHOWCASE_SLIDE_MS = 4500;
+
+  var PROJECT_SHOWCASE = [
+    { tag: 'proj.tag.res', title: 'proj.p0.title', loc: 'proj.p0.loc', media: [] },
+    { tag: 'proj.tag.res', title: 'proj.p1.title', loc: 'proj.p1.loc', media: [] },
+    { tag: 'proj.tag.com', title: 'proj.p2.title', loc: 'proj.p2.loc', media: [] },
+    { tag: 'proj.tag.res', title: 'proj.p3.title', loc: 'proj.p3.loc', media: [] },
+    { tag: 'proj.tag.res', title: 'proj.p4.title', loc: 'proj.p4.loc', media: [] },
+    { tag: 'proj.tag.com', title: 'proj.p5.title', loc: 'proj.p5.loc', alt: 'proj.p5.alt', media: [
+      { src: '/assets/images/projects/cabanas-planes-de-renderos/01.jpg', w: 1280, h: 720 },
+      { src: '/assets/images/projects/cabanas-planes-de-renderos/02.jpg', w: 720, h: 1280 },
+      { src: '/assets/images/projects/cabanas-planes-de-renderos/03.jpg', w: 720, h: 1280 },
+      { src: '/assets/images/projects/cabanas-planes-de-renderos/04.jpg', w: 1280, h: 720 },
+      { src: '/assets/images/projects/cabanas-planes-de-renderos/05.jpg', w: 717, h: 1280 },
+      { src: '/assets/images/projects/cabanas-planes-de-renderos/06.jpg', w: 1280, h: 963 },
+      { src: '/assets/images/projects/cabanas-planes-de-renderos/07.jpg', w: 1280, h: 720 },
+      { src: '/assets/images/projects/cabanas-planes-de-renderos/08.jpg', w: 963, h: 1280 },
+      { src: '/assets/images/projects/cabanas-planes-de-renderos/09.jpg', w: 1280, h: 963 },
+      { src: '/assets/images/projects/cabanas-planes-de-renderos/10.jpg', w: 1280, h: 717 },
+      { src: '/assets/images/projects/cabanas-planes-de-renderos/11.jpg', w: 717, h: 1280 },
+      { src: '/assets/images/projects/cabanas-planes-de-renderos/12.jpg', w: 717, h: 1280 },
+      { src: '/assets/images/projects/cabanas-planes-de-renderos/13.jpg', w: 963, h: 1280 },
+      { src: '/assets/images/projects/cabanas-planes-de-renderos/14.jpg', w: 1280, h: 963 },
+      { src: '/assets/images/projects/cabanas-planes-de-renderos/15.jpg', w: 1280, h: 717 }
+    ]},
+    { tag: 'proj.tag.com', title: 'proj.p6.title', loc: 'proj.p6.loc', alt: 'proj.p6.alt', media: [
+      { src: '/assets/images/projects/bac-santa-elena-t3/01.jpg', w: 1200, h: 1600 },
+      { src: '/assets/images/projects/bac-santa-elena-t3/02.jpg', w: 1200, h: 1600 },
+      { src: '/assets/images/projects/bac-santa-elena-t3/03.jpg', w: 1200, h: 1600 },
+      { src: '/assets/images/projects/bac-santa-elena-t3/04.jpg', w: 972, h: 1296 },
+      { src: '/assets/images/projects/bac-santa-elena-t3/05.jpg', w: 1200, h: 1600 }
+    ]},
+    { tag: 'proj.tag.com', title: 'proj.p7.title', loc: 'proj.p7.loc', alt: 'proj.p7.alt', media: [
+      { src: '/assets/images/projects/coscafe/01.jpg', w: 1600, h: 1200 },
+      { src: '/assets/images/projects/coscafe/02.jpg', w: 1200, h: 1600 },
+      { src: '/assets/images/projects/coscafe/03.jpg', w: 1200, h: 1600 }
+    ]},
+    { tag: 'proj.tag.res', title: 'proj.p8.title', loc: 'proj.p8.loc', alt: 'proj.p8.alt', media: [
+      { src: '/assets/images/projects/san-diego-house/01.jpg', w: 1280, h: 720 },
+      { src: '/assets/images/projects/san-diego-house/02.jpg', w: 1280, h: 720 },
+      { src: '/assets/images/projects/san-diego-house/03.jpg', w: 1280, h: 720 },
+      { src: '/assets/images/projects/san-diego-house/04.jpg', w: 1280, h: 720 },
+      { src: '/assets/images/projects/san-diego-house/05.jpg', w: 1280, h: 720 },
+      { src: '/assets/images/projects/san-diego-house/06.jpg', w: 1280, h: 720 },
+      { src: '/assets/images/projects/san-diego-house/07.jpg', w: 1280, h: 720 },
+      { src: '/assets/images/projects/san-diego-house/08.jpg', w: 1280, h: 720 }
+    ]},
+    { tag: 'proj.tag.res', title: 'proj.p9.title', loc: 'proj.p9.loc', alt: 'proj.p9.alt', media: [
+      { src: '/assets/images/projects/itzel/01.jpg', w: 1280, h: 960 },
+      { src: '/assets/images/projects/itzel/02.jpg', w: 1280, h: 960 },
+      { type: 'video', src: '/assets/videos/itzel-road.mp4' }
+    ]},
+    { tag: 'proj.tag.com', title: 'proj.p10.title', loc: 'proj.p10.loc', media: [] }
+  ];
+
+  var SHOWCASE_PLACEHOLDER_SVG =
+    '<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+    '<rect width="400" height="250" rx="8" fill="#1f2937"/>' +
+    '<rect x="100" y="30" width="200" height="150" rx="4" fill="none" stroke="#FACC15" stroke-width="1.5"/>' +
+    '<rect x="100" y="30" width="200" height="30" fill="#FACC15" opacity="0.1"/>' +
+    '<rect x="115" y="75" width="40" height="40" fill="#FACC15" opacity="0.1" rx="2"/>' +
+    '<rect x="180" y="75" width="40" height="40" fill="#FACC15" opacity="0.1" rx="2"/>' +
+    '<rect x="245" y="75" width="40" height="40" fill="#FACC15" opacity="0.1" rx="2"/>' +
+    '<rect x="115" y="130" width="40" height="40" fill="#FACC15" opacity="0.1" rx="2"/>' +
+    '<rect x="180" y="130" width="40" height="40" fill="#FACC15" opacity="0.1" rx="2"/>' +
+    '<rect x="245" y="130" width="40" height="40" fill="#FACC15" opacity="0.1" rx="2"/>' +
+    '<text x="200" y="220" text-anchor="middle" fill="#6B7280" font-family="Poppins, sans-serif" font-size="11"></text></svg>';
+
+  var SHOWCASE_ICON_PAUSE = '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+  var SHOWCASE_ICON_PLAY = '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+
+  function initProjectShowcase() {
+    var root = qs('[data-project-showcase]');
+    if (!root) return;
+
+    var mediaEl = qs('[data-showcase-media]', root);
+    var tagEl = qs('[data-showcase-tag]', root);
+    var titleEl = qs('[data-showcase-title]', root);
+    var locEl = qs('[data-showcase-loc]', root);
+    var currentEl = qs('[data-showcase-current]', root);
+    var dotsEl = qs('[data-showcase-dots]', root);
+    var prevBtn = qs('[data-showcase-prev]', root);
+    var nextBtn = qs('[data-showcase-next]', root);
+    var toggleBtn = qs('[data-showcase-toggle]', root);
+
+    var t = TRANSLATIONS[pageLang()] || TRANSLATIONS.en;
+    var total = PROJECT_SHOWCASE.length;
+    var current = parseInt(root.getAttribute('data-start-index') || '0', 10) || 0;
+    var slides = [];
+    var slideIndex = 0;
+    var timer = null;
+    var playing = false;
+
+    // One dot per project; clicking jumps straight to that project.
+    var dots = PROJECT_SHOWCASE.map(function (p, i) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'project-showcase__dot';
+      dot.setAttribute('aria-label', t[p.title] || '');
+      dot.addEventListener('click', function () { goTo(i); });
+      dotsEl.appendChild(dot);
+      return dot;
+    });
+
+    function shuffleSample(pool, n) {
+      var a = pool.slice();
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+      }
+      return a.slice(0, n);
+    }
+
+    function setToggleUI() {
+      toggleBtn.innerHTML = playing ? SHOWCASE_ICON_PAUSE : SHOWCASE_ICON_PLAY;
+      toggleBtn.setAttribute('aria-label', playing ? (t['proj.pause'] || 'Pause slideshow') : (t['proj.play'] || 'Play slideshow'));
+    }
+
+    function stopTimer() {
+      if (timer) { clearTimeout(timer); timer = null; }
+    }
+
+    function scheduleNext(ms) {
+      stopTimer();
+      if (!playing) return;
+      timer = setTimeout(advance, ms);
+    }
+
+    function activeVideo() {
+      return mediaEl.querySelector('video');
+    }
+
+    function playVideo(v) {
+      var promise = v.play();
+      if (promise && promise.catch) promise.catch(function () {});
+    }
+
+    function advance() {
+      if (slideIndex + 1 < slides.length) {
+        slideIndex++;
+        showSlide();
+      } else {
+        goTo(current + 1);
+      }
+    }
+
+    function goTo(index) {
+      current = ((index % total) + total) % total;
+      var p = PROJECT_SHOWCASE[current];
+      tagEl.textContent = t[p.tag] || '';
+      titleEl.textContent = t[p.title] || '';
+      locEl.textContent = t[p.loc] || '';
+      currentEl.textContent = current + 1;
+      dots.forEach(function (d, i) {
+        d.classList.toggle('project-showcase__dot--active', i === current);
+      });
+      slides = p.media.length ? shuffleSample(p.media, 3) : [null];
+      slideIndex = 0;
+      showSlide();
+    }
+
+    function showSlide() {
+      var m = slides[slideIndex];
+      var p = PROJECT_SHOWCASE[current];
+      var node;
+
+      if (!m) {
+        node = document.createElement('div');
+        node.className = 'project-showcase__slide project-showcase__slide--placeholder';
+        node.innerHTML = SHOWCASE_PLACEHOLDER_SVG;
+        var txt = node.querySelector('text');
+        if (txt) txt.textContent = t['misc.photo_soon'] || 'Photo Coming Soon';
+      } else if (m.type === 'video') {
+        node = document.createElement('video');
+        node.className = 'project-showcase__slide';
+        node.src = m.src;
+        node.muted = true;
+        node.playsInline = true;
+        node.setAttribute('playsinline', '');
+        node.preload = 'auto';
+        node.setAttribute('aria-label', (p.alt && t[p.alt]) || t[p.title] || '');
+        node.addEventListener('ended', advance);
+        node.addEventListener('error', function () { scheduleNext(1500); });
+      } else {
+        node = new Image();
+        node.className = 'project-showcase__slide';
+        node.src = m.src;
+        node.alt = (p.alt && t[p.alt]) || '';
+        if (m.w) node.width = m.w;
+        if (m.h) node.height = m.h;
+      }
+
+      var old = mediaEl.firstElementChild;
+      mediaEl.appendChild(node);
+      // Force a style flush so the opacity transition actually runs.
+      void node.offsetWidth;
+      node.classList.add('project-showcase__slide--active');
+
+      if (old && old !== node) {
+        old.classList.remove('project-showcase__slide--active');
+        if (old.tagName === 'VIDEO') old.pause();
+        setTimeout(function () {
+          if (old.parentNode) old.parentNode.removeChild(old);
+        }, 700);
+      }
+
+      // Videos drive their own timing via 'ended'; stills use the timer.
+      if (node.tagName === 'VIDEO') {
+        if (playing) playVideo(node);
+      } else {
+        scheduleNext(PROJECT_SHOWCASE_SLIDE_MS);
+      }
+
+      // Preload the next still so the crossfade never shows an empty frame.
+      var nxt = slides[slideIndex + 1];
+      if (nxt && nxt.type !== 'video') { var pre = new Image(); pre.src = nxt.src; }
+    }
+
+    function play() {
+      playing = true;
+      setToggleUI();
+      var v = activeVideo();
+      if (v) playVideo(v);
+      else scheduleNext(PROJECT_SHOWCASE_SLIDE_MS);
+    }
+
+    function pause() {
+      playing = false;
+      setToggleUI();
+      stopTimer();
+      var v = activeVideo();
+      if (v) v.pause();
+    }
+
+    prevBtn.addEventListener('click', function () { goTo(current - 1); });
+    nextBtn.addEventListener('click', function () { goTo(current + 1); });
+    toggleBtn.addEventListener('click', function () { if (playing) pause(); else play(); });
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        stopTimer();
+        var v = activeVideo();
+        if (v) v.pause();
+      } else if (playing) {
+        var v2 = activeVideo();
+        if (v2) playVideo(v2);
+        else scheduleNext(PROJECT_SHOWCASE_SLIDE_MS);
+      }
+    });
+
+    dots[current].classList.add('project-showcase__dot--active');
+
+    // Reduced motion: no autoplay — the user steps through manually.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      pause();
+      return;
+    }
+
+    // The static markup already shows the start project's first photo; build
+    // this visit's random sample around it and start the timer.
+    var start = PROJECT_SHOWCASE[current];
+    slides = start.media.length ? shuffleSample(start.media, 3) : [null];
+    slideIndex = 0;
+    playing = true;
+    setToggleUI();
+    showSlide();
   }
 
   // ── Scroll Reveal ────────────────────────────────────────────────────────────
@@ -455,12 +728,24 @@
       'proj.title': 'Our <em>Projects</em>',
       'proj.desc': 'We have been the executors of the following projects across El Salvador and beyond.',
       'proj.tag.res': 'Residential', 'proj.tag.com': 'Commercial',
+      'proj.prev': 'Previous project', 'proj.next': 'Next project',
+      'proj.pause': 'Pause slideshow', 'proj.play': 'Play slideshow',
       'proj.p0.title': 'Rental Units Building', 'proj.p0.loc': 'Santa Tecla, El Salvador',
       'proj.p1.title': 'Apartamentos Kawok', 'proj.p1.loc': 'San Salvador, El Salvador',
       'proj.p2.title': 'Sound Health Wellness Complex', 'proj.p2.loc': 'San Diego, USA',
       'proj.p3.title': 'Mont-Galia Apartments', 'proj.p3.loc': 'Santa Tecla, El Salvador',
       'proj.p4.title': 'Punta Mango House', 'proj.p4.loc': 'Punta Mango, El Salvador',
-      'proj.p5.title': 'Luxury Cabins', 'proj.p5.loc': 'La Posada de los P\u00e1jaros',
+      'proj.p5.title': 'Caba\u00f1as Planes de Renderos', 'proj.p5.loc': 'Planes de Renderos, El Salvador',
+      'proj.p5.alt': 'A-frame cabin under construction at Planes de Renderos',
+      'proj.p6.title': 'BAC Santa Elena T3', 'proj.p6.loc': 'Santa Elena, El Salvador',
+      'proj.p6.alt': 'Post-tensioned slab and rebar work at the BAC Santa Elena T3 building',
+      'proj.p7.title': 'Coscafe', 'proj.p7.loc': 'El Salvador',
+      'proj.p7.alt': 'Construction equipment on site at the Coscafe project',
+      'proj.p8.title': 'San Diego House', 'proj.p8.loc': 'San Diego, USA',
+      'proj.p8.alt': 'House project under construction in San Diego',
+      'proj.p9.title': 'Itzel', 'proj.p9.loc': 'Lake Ilopango, El Salvador',
+      'proj.p9.alt': 'Itzel project site at Lake Ilopango',
+      'proj.p10.title': 'Happiness Bay', 'proj.p10.loc': 'El Salvador',
 
       'mach.label': 'Our Machinery', 'mach.pre': 'Equipment Fleet',
       'mach.title': 'Our <em>Machinery</em>',
@@ -489,7 +774,7 @@
       'team.title': 'Meet the <em>Team</em>',
       'team.max.name': 'Jos\u00e9 Max Hern\u00e1ndez Sandoval',
       'team.max.role': 'CEO \u00b7 Engineer \u2014 Director de Obra',
-      'team.max.bio': 'GCS\u2019s CEO and a licensed engineer, Max holds the COAMSS/OPAMSS Director de Obra accreditation \u2014 the highest credential a civil engineer or architect can earn, requiring nine years of government-verified experience. It authorizes him to take legal responsibility for construction of any kind. Today no project can be built \u2014 and no company can legally call itself a construction firm \u2014 without a Director de Obra.',
+      'team.max.bio': 'GCS\u2019s CEO and a licensed engineer, Max holds the COAMSS/OPAMSS Director de Obra accreditation \u2014 the highest credential a civil engineer or architect can earn, requiring nine years of government-verified experience. It authorizes him to take legal responsibility for construction of any kind. His track record spans El Chaparral, the Airport expansion, Bitcoin mining facilities in Berl\u00edn, and apartment towers. Today no project can be built \u2014 and no company can legally call itself a construction firm \u2014 without a Director de Obra.',
       'team.max.alt': 'Jos\u00e9 Max Hern\u00e1ndez Sandoval, CEO of GCS',
       'team.max.cred_authority': 'COAMSS \u00b7 OPAMSS \u2014 Construction & Supervision',
       'team.max.cred_reg_label': 'Reg.',
@@ -499,10 +784,16 @@
       'team.max.carnet_label': 'View accreditation \u2197',
       'team.max.carnet_alt': 'OPAMSS accreditation card for Jos\u00e9 Max Hern\u00e1ndez Sandoval',
       'team.max.carnet_aria': 'Open the full OPAMSS accreditation card',
-      'team.ed.name': 'Eduardo Margerit',
+      'team.max.doc_dot': 'Registro DOT (PDF) \u2197',
+      'team.max.doc_pt3': 'Acreditaci\u00f3n PT \u2014 T3 (PDF) \u2197',
+      'team.ed.name': 'Eduardo M',
       'team.ed.role': 'COO',
       'team.ed.bio': 'Chief Operating Officer of GCS, Eduardo leads day-to-day operations \u2014 coordinating projects, resources, and teams to deliver every job on time and to standard.',
-      'team.ed.alt': 'Eduardo Margerit, COO of GCS',
+      'team.ed.alt': 'Eduardo M, COO of GCS',
+      'team.ric.name': 'Ricardo Cummings',
+      'team.ric.role': 'Director of Architecture',
+      'team.ric.bio': 'Director of Architecture at GCS, Ricardo leads architectural design across the company\u2019s residential and commercial portfolio.',
+      'team.ric.alt': 'Ricardo Cummings, Director of Architecture at GCS',
 
       'num.label': 'Key figures', 'num.pre': 'GCS By The Numbers',
       'num.title': '<em>Key Figures</em>',
@@ -529,7 +820,7 @@
 
       'ft.label': 'Footer', 'ft.home': 'GCS - Home', 'ft.nav': 'Footer links',
       'ft.0': 'Services', 'ft.1': 'Projects', 'ft.2': 'Team',
-      'ft.3': 'Contact',
+      'ft.3': 'Contact', 'ft.4': 'Credentials',
       'misc.photo_soon': 'Photo Coming Soon',
       'modal.label': 'Video player', 'modal.close': 'Close video'
     },
@@ -573,12 +864,24 @@
       'proj.title': 'Nuestros <em>Proyectos</em>',
       'proj.desc': 'Hemos sido los ejecutores de los siguientes proyectos en El Salvador y m\u00e1s all\u00e1.',
       'proj.tag.res': 'Residencial', 'proj.tag.com': 'Comercial',
+      'proj.prev': 'Proyecto anterior', 'proj.next': 'Proyecto siguiente',
+      'proj.pause': 'Pausar presentación', 'proj.play': 'Reproducir presentación',
       'proj.p0.title': 'Edificio de Unidades de Alquiler', 'proj.p0.loc': 'Santa Tecla, El Salvador',
       'proj.p1.title': 'Apartamentos Kawok', 'proj.p1.loc': 'San Salvador, El Salvador',
       'proj.p2.title': 'Complejo de Bienestar Sound Health', 'proj.p2.loc': 'San Diego, EE.UU.',
       'proj.p3.title': 'Apartamentos Mont-Galia', 'proj.p3.loc': 'Santa Tecla, El Salvador',
       'proj.p4.title': 'Casa Punta Mango', 'proj.p4.loc': 'Punta Mango, El Salvador',
-      'proj.p5.title': 'Caba\u00f1as de Lujo', 'proj.p5.loc': 'La Posada de los P\u00e1jaros',
+      'proj.p5.title': 'Caba\u00f1as Planes de Renderos', 'proj.p5.loc': 'Planes de Renderos, El Salvador',
+      'proj.p5.alt': 'Caba\u00f1a tipo A-frame en construcci\u00f3n en Planes de Renderos',
+      'proj.p6.title': 'BAC Santa Elena T3', 'proj.p6.loc': 'Santa Elena, El Salvador',
+      'proj.p6.alt': 'Losa postensada y trabajo de armadura en el edificio BAC Santa Elena T3',
+      'proj.p7.title': 'Coscafe', 'proj.p7.loc': 'El Salvador',
+      'proj.p7.alt': 'Maquinaria de construcci\u00f3n en el sitio del proyecto Coscafe',
+      'proj.p8.title': 'Casa San Diego', 'proj.p8.loc': 'San Diego, EE.UU.',
+      'proj.p8.alt': 'Proyecto de casa en construcci\u00f3n en San Diego',
+      'proj.p9.title': 'Itzel', 'proj.p9.loc': 'Lago de Ilopango, El Salvador',
+      'proj.p9.alt': 'Sitio del proyecto Itzel en el Lago de Ilopango',
+      'proj.p10.title': 'Happiness Bay', 'proj.p10.loc': 'El Salvador',
 
       'mach.label': 'Nuestra Maquinaria', 'mach.pre': 'Flota de Equipos',
       'mach.title': 'Nuestra <em>Maquinaria</em>',
@@ -607,7 +910,7 @@
       'team.title': 'Conoce al <em>Equipo</em>',
       'team.max.name': 'Jos\u00e9 Max Hern\u00e1ndez Sandoval',
       'team.max.role': 'CEO \u00b7 Ingeniero \u2014 Director de Obra',
-      'team.max.bio': 'CEO de GCS e ingeniero, Max posee la acreditaci\u00f3n de Director de Obra de COAMSS/OPAMSS \u2014 la m\u00e1xima credencial que un ingeniero civil o arquitecto puede obtener, que exige nueve a\u00f1os de experiencia verificada por el gobierno. Lo faculta para asumir la responsabilidad legal de construcciones de cualquier tipo. Hoy ninguna obra puede construirse \u2014 ni ninguna empresa puede llamarse legalmente constructora \u2014 sin un Director de Obra.',
+      'team.max.bio': 'CEO de GCS e ingeniero, Max posee la acreditaci\u00f3n de Director de Obra de COAMSS/OPAMSS \u2014 la m\u00e1xima credencial que un ingeniero civil o arquitecto puede obtener, que exige nueve a\u00f1os de experiencia verificada por el gobierno. Lo faculta para asumir la responsabilidad legal de construcciones de cualquier tipo. Su trayectoria incluye El Chaparral, la ampliaci\u00f3n del Aeropuerto, instalaciones de miner\u00eda de Bitcoin en Berl\u00edn y torres de apartamentos. Hoy ninguna obra puede construirse \u2014 ni ninguna empresa puede llamarse legalmente constructora \u2014 sin un Director de Obra.',
       'team.max.alt': 'Jos\u00e9 Max Hern\u00e1ndez Sandoval, CEO de GCS',
       'team.max.cred_authority': 'COAMSS \u00b7 OPAMSS \u2014 Construcci\u00f3n y Supervisi\u00f3n',
       'team.max.cred_reg_label': 'Reg.',
@@ -617,10 +920,16 @@
       'team.max.carnet_label': 'Ver acreditaci\u00f3n \u2197',
       'team.max.carnet_alt': 'Carnet de acreditaci\u00f3n OPAMSS de Jos\u00e9 Max Hern\u00e1ndez Sandoval',
       'team.max.carnet_aria': 'Abrir el carnet de acreditaci\u00f3n completo',
-      'team.ed.name': 'Eduardo Margerit',
+      'team.max.doc_dot': 'Registro DOT (PDF) \u2197',
+      'team.max.doc_pt3': 'Acreditaci\u00f3n PT \u2014 T3 (PDF) \u2197',
+      'team.ed.name': 'Eduardo M',
       'team.ed.role': 'COO \u00b7 Director de Operaciones',
       'team.ed.bio': 'Director de Operaciones (COO) de GCS, Eduardo lidera las operaciones del d\u00eda a d\u00eda \u2014 coordinando proyectos, recursos y equipos para entregar cada obra a tiempo y con la calidad esperada.',
-      'team.ed.alt': 'Eduardo Margerit, COO de GCS',
+      'team.ed.alt': 'Eduardo M, COO de GCS',
+      'team.ric.name': 'Ricardo Cummings',
+      'team.ric.role': 'Director de Arquitectura',
+      'team.ric.bio': 'Director de Arquitectura de GCS, Ricardo lidera el dise\u00f1o arquitect\u00f3nico en el portafolio residencial y comercial de la empresa.',
+      'team.ric.alt': 'Ricardo Cummings, Director de Arquitectura de GCS',
 
       'num.label': 'Cifras clave', 'num.pre': 'GCS en N\u00fameros',
       'num.title': '<em>Cifras Clave</em>',
@@ -647,7 +956,7 @@
 
       'ft.label': 'Pie de p\u00e1gina', 'ft.home': 'GCS - Inicio', 'ft.nav': 'Enlaces del pie',
       'ft.0': 'Servicios', 'ft.1': 'Proyectos', 'ft.2': 'Equipo',
-      'ft.3': 'Contacto',
+      'ft.3': 'Contacto', 'ft.4': 'Credenciales',
       'misc.photo_soon': 'Foto pr\u00f3ximamente',
       'modal.label': 'Reproductor de v\u00eddeo', 'modal.close': 'Cerrar v\u00eddeo'
     }
